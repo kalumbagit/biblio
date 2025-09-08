@@ -31,6 +31,17 @@ class User(AbstractUser):
     suspension_start = models.DateField(null=True, blank=True)
     suspension_end = models.DateField(null=True, blank=True)
 
+    def save(self, *args, **kwargs):
+        # règle de correspondance automatique
+        if self.is_superuser:
+            self.role = "ADMIN"
+        elif self.is_staff:
+            self.role = "SECRETARY"
+        else:
+            self.role = "READER"  # déjà le défaut, mais on force la cohérence
+
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return f"{self.username} ({self.get_role_display()})"
 
