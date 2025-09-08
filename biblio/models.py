@@ -201,11 +201,13 @@ class LoanRequestItem(models.Model):
     """Livre(s) demandé(s) dans une demande de prêt"""
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     loan_request = models.ForeignKey(LoanRequest, on_delete=models.CASCADE, related_name="items")
-    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="requested_items")
+    book_stock = models.ForeignKey(BookStock, on_delete=models.CASCADE, related_name="requested_items")
+
     qty = models.PositiveIntegerField(default=1)
 
     def __str__(self):
-        return f"{self.book.title} (x{self.qty})"
+        return f"{self.book_stock.book.title} ({self.book_stock.language}) x{self.qty}"
+
 
 # ==========================
 # LOANS

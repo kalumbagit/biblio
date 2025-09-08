@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from rest_framework import viewsets,pagination,response,status  
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import action
 from rest_framework import permissions
@@ -24,8 +24,10 @@ from ..permissions import (
 )
 
 
+
+
 # ==========================
-# UTILITY FUNCTIONS
+# UTILITY FUNCTIONS AND CLASSES
 # ==========================
 
 def create_audit_log(actor, action, entity_type, entity_id, old_value=None, new_value=None):
@@ -39,6 +41,35 @@ def create_audit_log(actor, action, entity_type, entity_id, old_value=None, new_
         new_value=new_value
     )
 
+class CustomPagination(pagination.PageNumberPagination):
+    # Paramètres configurables
+    page_size = 20  # Valeur par défaut
+    page_size_query_param = 'page_size'  # Paramètre pour changer la taille de page
+    max_page_size = 100  # Taille maximale autorisée
+    page_query_param = 'page'  # Paramètre pour spécifier le numéro de page
+
+    def get_paginated_response(self, data):
+        return response.Response({
+            'links': {
+                'next': self.get_next_link(),
+                'previous': self.get_previous_link()
+            },
+            'count': self.page.paginator.count,
+            'total_pages': self.page.paginator.num_pages,
+            'current_page': self.page.number,
+            'page_size': self.get_page_size(self.request),
+            'results': data
+        })
+
+    def get_page_size(self, request):
+        if self.page_size_query_param:
+            try:
+                page_size = int(request.query_params.get(self.page_size_query_param, self.page_size))
+                if page_size > 0:
+                    return min(page_size, self.max_page_size)
+            except (TypeError, ValueError):
+                pass
+        return self.page_size
 
 # ==========================
 # CATALOG VIEWS
@@ -59,6 +90,8 @@ class CategoryViewSet(viewsets.ModelViewSet):
 class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all().prefetch_related('authors', 'category')
     serializer_class = None
+    pagination_class=CustomPagination
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def get_serializer_class(self, *args, **kwargs):
         if self.action in ["create", "update", "partial_update"]:
@@ -72,10 +105,8 @@ class BookViewSet(viewsets.ModelViewSet):
     
     def get_permissions(self):
         if self.action in ['list', 'retrieve']:
-            return [permissions.IsAuthenticated()]
+            return [] # accès public
         return [IsSecretary()]
-
-# pas encore terminé dans l'implementation^^^^^^^^^^^^^^$$$$$$$$$$$$$$$$$$$$$$$$$
 
 # ==========================
 # LOAN REQUEST VIEWS
@@ -87,15 +118,12 @@ class LoanRequestViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        queryset = LoanRequest.objects.all().prefetch_related(
-            'items', 'items__book', 'requester', 'secretary'
-        )
+        queryset = LoanRequest.objects.all().select_related("requester", "secretary").prefetch_related("items", "items__book")
         
         if user.role in ["SECRETARY", "ADMIN"]:
             return queryset
         return queryset.filter(requester=user)
     
-
     def get_serializer_class(self):
         if self.action in ['create']:
             return LoanRequestCreateSerializer
@@ -110,15 +138,51 @@ class LoanRequestViewSet(viewsets.ModelViewSet):
     def get_permissions(self):
         if self.action in ['list', 'retrieve']:
             return [permissions.IsAuthenticated(), IsOwnerOrSecretary()]
-        elif self.action == 'create':
+        elif self.action in ['update', 'partial_update','create']:
             return [IsReader()]
         return [IsSecretary()]
     
     def perform_create(self, serializer):
         serializer.save(requester=self.request.user)
+
+
+    @action(detail=True, methods=['post'], permission_classes=[IsReader])
+    def cancel(self, request, pk=None):
+        loan_request = self.get_object()
+        
+        if loan_request.status != "PENDING":
+            return Response(
+                {"error": "Impossible d’annuler une demande déjà traitée."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        loan_request.status = "CANCELED"
+        loan_request.save()
+
+        # notifier le lecteur
+        Notification.objects.create(
+            user=loan_request.requester,
+            type="CANCELATION",
+            title="Demande annulée",
+            message="Votre demande de prêt a été annulée avec succès.",
+            channel="IN_APP"
+        )
+
+        serializer = self.get_serializer(loan_request)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     
     @action(detail=True, methods=['post'], permission_classes=[IsSecretary])
     def approve(self, request, pk=None):
+        """
+        cette methode permet de valider une demande de pret
+        et de creer un pret associe avec les exemplaires disponibles
+        1. verifier que la demande est en attente
+        2. creer le pret avec une date de retour a 14 jours
+        3. ajouter les exemplaires disponibles au pret
+        4. mettre a jour le statut de la demande
+        5. creer une notification pour l'utilisateur
+        6. retourner la demande avec le statut mis a jour 
+        """
         loan_request = self.get_object()
         
         if loan_request.status != 'PENDING':
@@ -127,26 +191,33 @@ class LoanRequestViewSet(viewsets.ModelViewSet):
                 status=status.HTTP_400_BAD_REQUEST
             )
         
-        # Create the loan
+        # creation du pret
         loan = Loan.objects.create(
             borrower=loan_request.requester,
             secretary=request.user,
             due_date=timezone.now().date() + timedelta(days=14)
         )
         
-        # Add items to the loan
+        # ajout des exemplaires disponibles au pret avec leur quantité
         for item in loan_request.items.all():
-            # Find available copies
-            available_copies = item.book.copies.filter(available=True)[:item.qty]
-            
-            for copy in available_copies:
-                LoanItem.objects.create(
-                    loan=loan,
-                    book_copy=copy,
-                    condition_out="Bon état"
+            # chercher les exemplaires disponibles
+            available_stocks = item.book.stocks.filter(available_quantity__gte=item.qty)
+            if not available_stocks.exists():
+                return Response(
+                    {"error": f"Pas assez d'exemplaires disponibles pour {item.book.title}."},
+                    status=status.HTTP_400_BAD_REQUEST
                 )
-                copy.available = False
-                copy.save()
+            stock = available_stocks.first()
+
+            
+            stock.borrow(item.qty)
+
+            LoanItem.objects.create(
+                loan=loan,
+                book_stock=stock,
+                condition_out="Bon état"
+            )
+
         
         # Update request status
         loan_request.status = 'APPROVED'
@@ -197,11 +268,7 @@ class LoanRequestViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
-class LoanRequestItemViewSet(viewsets.ModelViewSet):
-    queryset = LoanRequestItem.objects.all().select_related('book', 'loan_request')
-    serializer_class = LoanRequestItemSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
+# pas encore terminé dans l'implementation^^^^^^^^^^^^^^$$$$$$$$$$$$$$$$$$$$$$$$$
 
 # ==========================
 # LOAN VIEWS
