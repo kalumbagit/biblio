@@ -13,9 +13,9 @@ from ..models import (
 )
 
 from ..serializers import (
-    AuthorSerializer, CategorySerializer, BookWriteSerializer, BookCopySerializer,BookListSerializer, BookDetailSerializer,
-    LoanRequestSerializer, LoanRequestItemSerializer, LoanSerializer, LoanItemSerializer,
-    PenaltySerializer, SuspensionSerializer, NotificationSerializer, AuditLogSerializer
+    AuthorSerializer, CategorySerializer, BookWriteSerializer, LoanRequestCreateSerializer,BookListSerializer, BookDetailSerializer,
+    LoanRequestDetailSerializer, LoanRequestItemSerializer, LoanRequestUpdateSerializer, LoanItemSerializer,
+    PenaltySerializer, SuspensionSerializer,LoanRequestListSerializer, NotificationSerializer, AuditLogSerializer,LoanRequestSecretaryResponseSerializer
 )
 
 
@@ -57,10 +57,10 @@ class CategoryViewSet(viewsets.ModelViewSet):
 
 
 class BookViewSet(viewsets.ModelViewSet):
-    queryset = Book.objects.all().prefetch_related('authors', 'categories')
+    queryset = Book.objects.all().prefetch_related('authors', 'category')
     serializer_class = None
 
-    def get_serializer(self, *args, **kwargs):
+    def get_serializer_class(self, *args, **kwargs):
         if self.action in ["create", "update", "partial_update"]:
             return BookWriteSerializer
         elif self.action == "list":
@@ -74,20 +74,6 @@ class BookViewSet(viewsets.ModelViewSet):
         if self.action in ['list', 'retrieve']:
             return [permissions.IsAuthenticated()]
         return [IsSecretary()]
-    
-    @action(detail=True, methods=['get'])
-    def copies(self, request, pk=None):
-        book = self.get_object()
-        copies = book.copies.all()
-        serializer = BookCopySerializer(copies, many=True)
-        return Response(serializer.data)
-
-
-class BookCopyViewSet(viewsets.ModelViewSet):
-    queryset = BookCopy.objects.all().select_related('book')
-    serializer_class = BookCopySerializer
-    permission_classes = [IsSecretary]
-
 
 # pas encore terminé dans l'implementation^^^^^^^^^^^^^^$$$$$$$$$$$$$$$$$$$$$$$$$
 
@@ -96,18 +82,30 @@ class BookCopyViewSet(viewsets.ModelViewSet):
 # ==========================
 
 class LoanRequestViewSet(viewsets.ModelViewSet):
-    serializer_class = LoanRequestSerializer
-    
-    
+
+    serializer_class = None
+
     def get_queryset(self):
         user = self.request.user
+        queryset = LoanRequest.objects.all().prefetch_related(
+            'items', 'items__book', 'requester', 'secretary'
+        )
+        
         if user.role in ["SECRETARY", "ADMIN"]:
-            return LoanRequest.objects.all().prefetch_related('items')
-        return LoanRequest.objects.filter(requester=user).prefetch_related('items')
+            return queryset
+        return queryset.filter(requester=user)
     
 
-    def get_serializer(self, *args, **kwargs): # methode a implementer
-        pass
+    def get_serializer_class(self):
+        if self.action in ['create']:
+            return LoanRequestCreateSerializer
+        elif self.action in ['update', 'partial_update']:
+            return LoanRequestUpdateSerializer
+        elif self.action == 'retrieve':
+            return LoanRequestDetailSerializer
+        elif self.action in ['approve', 'reject']:
+            return LoanRequestSecretaryResponseSerializer
+        return LoanRequestListSerializer
     
     def get_permissions(self):
         if self.action in ['list', 'retrieve']:

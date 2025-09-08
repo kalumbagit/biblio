@@ -1,10 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 import uuid
-
+from django.utils import timezone
+from datetime import timedelta
 # ==========================
 # USER & AUTHENTICATION
 # ==========================
+
+RETURN_DATE_DELAY = 14 # jours
 
 class User(AbstractUser):
     """
@@ -70,11 +73,10 @@ class Book(models.Model):
     )
 
     summary = models.TextField(blank=True, null=True)
-    language = models.CharField(max_length=10, help_text="Code langue ISO 639-1", default="fr")
     publisher = models.CharField(max_length=120, blank=True, null=True)
     publication_year = models.PositiveIntegerField(blank=True, null=True)
 
-    categories = models.ForeignKey(Category,on_delete=models.CASCADE,related_name="books", blank=True)
+    category = models.ForeignKey(Category,on_delete=models.CASCADE,related_name="books", blank=True)
     authors = models.ManyToManyField(Author, related_name="books", blank=True)
 
     def __str__(self):
@@ -82,32 +84,48 @@ class Book(models.Model):
     
     @property
     def available_copies(self):
-        """Retourne le nombre d’exemplaires disponibles"""
-        return self.copies.filter(available=True).count()
+        """Retourne le nombre d'exemplaires disponibles (toutes langues confondues) """
+        return self.stocks.aggregate(
+            total_available=models.Sum('available_quantity')
+        )['total_available'] or 0
 
     @property
     def is_available(self):
-        """Retourne True si au moins 2 exemplaires sont disponible car il doit toujours rester un exemplaire en bibliothèque"""
-        return self.available_copies > 0
+        """Retourne True si au moins 2 exemplaires sont disponibles"""
+        return self.available_copies > 1
 
-
-class BookCopy(models.Model):
-    """Exemplaire physique d’un livre (inventaire)"""
+class BookStock(models.Model):
+    """Stock d’exemplaires physiques pour une langue donnée"""
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="copies")
-    inventory_code = models.CharField(max_length=50, unique=True)  # Code interne ou étiquette
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="stocks")
+    language = models.CharField(max_length=10, help_text="Code langue ISO 639-1", default="fr")
+    total_quantity = models.PositiveIntegerField(default=1)
+    available_quantity = models.PositiveIntegerField(default=1)
     condition_note = models.CharField(max_length=255, blank=True, null=True)
-    available = models.BooleanField(default=True)  # est à True si l'exemplaire n'est pas prêté
-    added_at = models.DateTimeField(auto_now_add=True)
-    def __str__(self):
-        return f"{self.book.title} [{self.inventory_code}]"
 
+    def __str__(self):
+        return f"{self.book.title} ({self.language}) [{self.available_quantity}/{self.total_quantity}]"
+
+    def borrow(self, qty=1):
+        """Réduit la quantité disponible lors d’un prêt"""
+        if self.available_quantity < qty:
+            raise ValueError("Pas assez d'exemplaires disponibles")
+        self.available_quantity -= qty
+        self.save()
+
+    def return_books(self, qty=1):
+        """Réaugmente la quantité disponible lors d’un retour"""
+        if self.available_quantity + qty > self.total_quantity:
+            raise ValueError("Impossible de dépasser la quantité totale")
+        self.available_quantity += qty
+        self.save()
+    
 # ==========================
 # LOAN REQUESTS
 # ==========================
 
 class LoanRequest(models.Model):
-    """Demande d’emprunt soumise par un lecteur"""
+    """Demande d'emprunt soumise par un lecteur"""
     STATUS_CHOICES = [
         ("PENDING", "En attente"),
         ("APPROVED", "Approuvée"),
@@ -129,6 +147,44 @@ class LoanRequest(models.Model):
     def __str__(self):
         return f"Request {self.id} by {self.requester.username} - {self.status}"
 
+    def approve(self, secretary):
+        """Approuver la demande de prêt"""
+        self.status = "APPROVED"
+        self.secretary = secretary
+        self.decision_at = timezone.now()
+        self.save()
+        
+        # Créer le prêt correspondant
+        loan = Loan.objects.create(
+            borrower=self.requester,
+            secretary=secretary,
+            due_date=timezone.now().date() + timedelta(days=RETURN_DATE_DELAY                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           ) 
+        )
+        
+        for item in self.items.all():
+            # Réserver les exemplaires
+            book_stock = BookStock.objects.filter(
+                book=item.book, 
+                available_quantity__gte=item.qty
+            ).first()
+            if not book_stock:
+                raise ValueError(f"Pas assez d'exemplaires disponibles pour {item.book.title}")
+        
+            LoanItem.objects.create(
+                    loan=loan,
+                    book_stock=book_stock,
+                    qty=item.qty,
+                    condition_out="Bon état"  # Valeur par défaut
+                )
+            book_stock.borrow(item.qty)
+
+    def reject(self, secretary, reason):
+        """Rejeter la demande de prêt"""
+        self.status = "REJECTED"
+        self.secretary = secretary
+        self.rejection_reason = reason
+        self.decision_at = timezone.now()
+        self.save()
 
 class LoanRequestItem(models.Model):
     """Livre(s) demandé(s) dans une demande de prêt"""
@@ -139,7 +195,6 @@ class LoanRequestItem(models.Model):
 
     def __str__(self):
         return f"{self.book.title} (x{self.qty})"
-
 
 # ==========================
 # LOANS
@@ -167,17 +222,32 @@ class Loan(models.Model):
     def __str__(self):
         return f"Loan {self.id} - {self.borrower.username}"
 
-
+    @property
+    def is_overdue(self):
+        """Vérifie si le prêt est en retard"""
+        return self.status == "ACTIVE" and timezone.now().date() > self.due_date
+    
+    def return_books(self):
+        """Marquer le prêt comme retourné"""
+        self.status = "RETURNED"
+        self.return_date = timezone.now().date()
+        self.save()
+        
+        # Libérer les exemplaires
+        for item in self.items.all():
+            item.book_stock.return_books(item.quantity)
+ 
 class LoanItem(models.Model):
     """Exemplaire spécifique inclus dans un emprunt"""
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     loan = models.ForeignKey(Loan, on_delete=models.CASCADE, related_name="items")
-    book_copy = models.ForeignKey(BookCopy, on_delete=models.CASCADE, related_name="loan_items")
+    book_stock = models.ForeignKey(BookStock, on_delete=models.CASCADE, related_name="loan_items")
+    qty = models.PositiveIntegerField(default=1)
     condition_out = models.CharField(max_length=255, blank=True, null=True)  # État au prêt
     condition_in = models.CharField(max_length=255, blank=True, null=True)   # État au retour
 
     def __str__(self):
-        return f"{self.book_copy.inventory_code} for Loan {self.loan.id}"
+        return f"{self.book_stock.book.title} (x{self.qty}) for Loan {self.loan.id}"
 
 
 # ==========================

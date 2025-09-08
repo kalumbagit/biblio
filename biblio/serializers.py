@@ -2,9 +2,10 @@ from rest_framework import serializers
 from django.contrib.auth import authenticate
 from django.utils import timezone
 from django.db.models import Sum
+import uuid
 
 from .models import (
-    User, Author, Category, Book, BookCopy, 
+    User, Author, Category, Book, BookStock, 
     LoanRequest, LoanRequestItem, Loan, LoanItem,
     Penalty, Suspension, Notification, AuditLog
 )
@@ -36,7 +37,6 @@ class LoginSerializer(serializers.Serializer):
 
         return data
 
-
 class UserSerializer(serializers.ModelSerializer):
     role_display = serializers.CharField(source='get_role_display', read_only=True)
     
@@ -47,7 +47,6 @@ class UserSerializer(serializers.ModelSerializer):
             'role', 'role_display'
         )
         read_only_fields = ('id')
-
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
@@ -73,7 +72,6 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         user.set_password(password)
         user.save()
         return user
-
 
 class UserProfileSerializer(serializers.ModelSerializer):
     role_display = serializers.CharField(source='get_role_display', read_only=True)
@@ -130,6 +128,9 @@ class CategorySerializer(serializers.ModelSerializer):
     def get_books_count(self, obj):
         return obj.books.count()
 
+#===========================
+# BOOK SERIALIZERS
+#===========================
 class BookListSerializer(serializers.ModelSerializer):
     authors = serializers.StringRelatedField(many=True)
     category = serializers.StringRelatedField()
@@ -139,7 +140,7 @@ class BookListSerializer(serializers.ModelSerializer):
         model = Book
         fields = (
             'id', 'isbn', 'title', 'image_couverture', 'summary', 
-            'language', 'publisher', 'publication_year', 
+            'publisher', 'publication_year', 
             'authors', 'category', 'available_copies', 'is_available'
         )
         read_only_fields = ('id', 'available_copies', 'is_available')
@@ -148,119 +149,229 @@ class BookDetailSerializer(serializers.ModelSerializer):
     authors = AuthorSerializer(many=True, read_only=True)
     category = CategorySerializer(many=True, read_only=True)
     available_copies = serializers.IntegerField(read_only=True)
-    copies = serializers.SerializerMethodField()
+    stocks = serializers.SerializerMethodField()
 
     class Meta:
         model = Book
         fields = (
             'id', 'isbn', 'title', 'image_couverture', 'summary', 
-            'language', 'publisher', 'publication_year', 
-            'authors', 'category', 'available_copies', 'is_available', 'copies'
+            'publisher', 'publication_year', 
+            'authors', 'category', 'available_copies', 'is_available', 'stocks'
         )
         read_only_fields = ('id', 'available_copies', 'is_available')
 
-    def get_copies(self, obj):
-        copies = obj.copies.all()
-        return BookCopySerializer(copies, many=True).data
+    def get_stocks(self, obj):
+        stocks = obj.stocks.all()
+        return BookStockSerializer(stocks, many=True).data
 
+class BookStockNestedSerializer(serializers.ModelSerializer):
+    """Serializer utilisé pour créer ou modifier les stocks liés au livre."""
+    class Meta:
+        model = BookStock
+        fields = ('id', 'language', 'total_quantity', 'available_quantity', 'condition_note')
+        read_only_fields = ('id',)
 
 class BookWriteSerializer(serializers.ModelSerializer):
     author_ids = serializers.ListField(
-        child=serializers.UUIDField(), 
-        write_only=True, 
+        child=serializers.UUIDField(),
+        write_only=True,
         required=False
     )
-    category_id = serializers.UUIDField(  # ici on ne prend qu'une seule catégorie
-        write_only=True, 
+    category_id = serializers.UUIDField(
+        write_only=True,
         required=False
     )
+    # stocks passés en même temps que la création du livre
+    stocks = BookStockNestedSerializer(many=True, write_only=True, required=False)
 
     class Meta:
         model = Book
         fields = (
-            'id', 'isbn', 'title', 'image_couverture', 'summary', 
-            'language', 'publisher', 'publication_year', 
-            'author_ids', 'category_id'
+            'id', 'isbn', 'title', 'image_couverture', 'summary',
+            'publisher', 'publication_year',
+            'author_ids', 'category_id', 'stocks'
         )
         read_only_fields = ('id',)
 
     def create(self, validated_data):
         author_ids = validated_data.pop('author_ids', [])
-        category_id = validated_data.pop('category_id',None)
-        
+        category_id = validated_data.pop('category_id', None)
+        stocks_data = validated_data.pop('stocks', [])
+
         book = Book.objects.create(**validated_data)
-        
-        # Add authors and categories
+
+        # Add authors
         if author_ids:
             authors = Author.objects.filter(id__in=author_ids)
             book.authors.set(authors)
 
-        # Add category (unique)
+        # Add category
         if category_id:
             category = Category.objects.get(id=category_id)
-            book.categories.set([category]) 
-              
-        return book
+            book.category = category
+            book.save()
 
+        # Créer les stocks
+        for stock_data in stocks_data:
+            BookStock.objects.create(book=book, **stock_data)
+
+        return book
 
     def update(self, instance, validated_data):
         author_ids = validated_data.pop('author_ids', None)
         category_id = validated_data.pop('category_id', None)
-        
-        # Update basic fields
+        stocks_data = validated_data.pop('stocks', None)
+
+        # Update champs simples
         for attr, value in validated_data.items():
             setattr(instance, attr, value)
         instance.save()
-        
-        # Update authors if provided
+
+        # Update auteurs
         if author_ids is not None:
             authors = Author.objects.filter(id__in=author_ids)
             instance.authors.set(authors)
-        
-        # Update category if provided
+
+        # Update catégorie
         if category_id is not None:
             category = Category.objects.get(id=category_id)
-            instance.categories.set([category])
-        
+            instance.category = category
+            instance.save()
+
+        # Update stocks si fournis
+        if stocks_data is not None:
+            for stock_data in stocks_data:
+                stock_id = stock_data.get("id", None)
+                if stock_id:  
+                    # Mise à jour d'un stock existant
+                    try:
+                        stock = instance.stocks.get(id=stock_id)
+                        for attr, value in stock_data.items():
+                            setattr(stock, attr, value)
+                        stock.save()
+                    except BookStock.DoesNotExist:
+                        continue
+                else:
+                    # Création d'un nouveau stock
+                    BookStock.objects.create(book=instance, **stock_data)
+
         return instance
-
-
-class BookCopySerializer(serializers.ModelSerializer):
+    
+class BookStockSerializer(serializers.ModelSerializer):
     book_title = serializers.CharField(source='book.title', read_only=True)
     book_isbn = serializers.CharField(source='book.isbn', read_only=True)
-    
+
     class Meta:
-        model = BookCopy
+        model = BookStock
         fields = '__all__'
         read_only_fields = ('id', 'added_at')
-
-
-class BookCopyCreateSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = BookCopy
-        fields = ('inventory_code', 'condition_note', 'available')
-        read_only_fields = ('id', 'added_at')
-
 
 # ==========================
 # LOAN REQUEST SERIALIZERS
 # ==========================
 
-class LoanRequestItemSerializer(serializers.ModelSerializer):
+class LoanRequestItemSerializer(serializers.ModelSerializer): # item d'une demande de pret
     book_title = serializers.CharField(source='book.title', read_only=True)
-    book_isbn = serializers.CharField(source='book.isbn', read_only=True)
     
     class Meta:
         model = LoanRequestItem
-        fields = '__all__'
-        read_only_fields = ('id', 'loan_request')
+        fields = ["id", "book", "book_title", "qty"]
+        read_only_fields = ("id",)
 
+class LoanRequestUpdateSerializer(serializers.ModelSerializer):
+    """
+    Permet à l'utilisateur (lecteur) d'annuler sa demande
+    ou de modifier les livres demandés tant qu'elle est en attente.
+    """
+    items = LoanRequestItemSerializer(many=True, required=False)
 
-class LoanRequestItemCreateSerializer(serializers.ModelSerializer):
     class Meta:
-        model = LoanRequestItem
-        fields = ('book', 'qty')
+        model = LoanRequest
+        fields = ("status", "items")
+        read_only_fields = ("id", "requester", "created_at", "decision_at", "secretary", "rejection_reason")
 
+    def validate(self, data):
+        instance = self.instance
+
+        # Empêcher la modification si déjà validée/rejetée/annulée
+        if instance.status != "PENDING":
+            raise serializers.ValidationError("Impossible de modifier une demande déjà traitée.")
+
+        # Si l'utilisateur veut annuler
+        if data.get("status") == "CANCELED":
+            return data
+
+        # Si l'utilisateur modifie les items, vérifier que ce n'est pas vide
+        if "items" in data and len(data["items"]) == 0:
+            raise serializers.ValidationError("La demande doit contenir au moins un livre.")
+
+        return data
+
+    def update(self, instance, validated_data):
+        # Cas : annulation
+        if validated_data.get("status") == "CANCELED":
+            instance.status = "CANCELED"
+            instance.save()
+            return instance
+
+        # Cas : mise à jour des items
+        items_data = validated_data.pop("items", None)
+        if items_data is not None:
+            # On supprime les anciens items puis on recrée
+            instance.items.all().delete()
+            for item in items_data:
+                LoanRequestItem.objects.create(loan_request=instance, **item)
+
+        instance.save()
+        return instance
+    
+class LoanRequestCreateSerializer(serializers.ModelSerializer):
+    items = LoanRequestItemSerializer(many=True, write_only=True)
+    requester = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
+    class Meta:
+        model = LoanRequest
+        fields = [
+            "id",
+            "requester",
+            "status",
+            "items",
+            "created_at",
+            "decision_at",
+        ]
+        read_only_fields = ["id", "status", "created_at", "decision_at"]
+
+    def validate(self, data):
+        # Vérifier que la demande contient au moins un livre
+        if not data.get('items') or len(data['items']) == 0:
+            raise serializers.ValidationError("La demande doit contenir au moins un livre.")
+        
+        # Vérifier que l'utilisateur n'est pas suspendu
+        user = self.context['request'].user
+        if user.is_suspended:
+            raise serializers.ValidationError("Votre compte est suspendu. Vous ne pouvez pas faire de demande de prêt.")
+        
+        # Vérifier la disponibilité des livres
+        for item in data['items']:
+            book = item['book']
+            quantity = item['qty']
+            available_copies = book.available_copies
+            if available_copies < quantity:
+                raise serializers.ValidationError(
+                    f"Pas assez d'exemplaires disponibles pour {book.title}. "
+                    f"Disponible: {available_copies}, Demandé: {quantity}"
+                )
+        
+        return data
+
+    def create(self, validated_data):
+        items_data = validated_data.pop("items", [])
+        loan_request = LoanRequest.objects.create(**validated_data)
+
+        for item in items_data:
+            LoanRequestItem.objects.create(loan_request=loan_request, **item)
+
+        return loan_request
 
 class LoanRequestListSerializer(serializers.ModelSerializer):
     requester_name = serializers.CharField(source='requester.get_full_name', read_only=True)
@@ -280,7 +391,6 @@ class LoanRequestListSerializer(serializers.ModelSerializer):
     def get_items_count(self, obj):
         return obj.items.count()
 
-
 class LoanRequestDetailSerializer(serializers.ModelSerializer):
     requester_name = serializers.CharField(source='requester.get_full_name', read_only=True)
     requester_username = serializers.CharField(source='requester.username', read_only=True)
@@ -297,63 +407,40 @@ class LoanRequestDetailSerializer(serializers.ModelSerializer):
         )
         read_only_fields = ('id', 'created_at', 'decision_at')
 
-
-class LoanRequestCreateSerializer(serializers.ModelSerializer):
-    items = LoanRequestItemCreateSerializer(many=True)
-
-    class Meta:
-        model = LoanRequest
-        fields = ('items',)
-        read_only_fields = ('id', 'requester', 'status', 'created_at')
-
-    def validate(self, data):
-        # Vérifier que la demande contient au moins un livre
-        if not data.get('items') or len(data['items']) == 0:
-            raise serializers.ValidationError("La demande doit contenir au moins un livre.")
-        
-        # Vérifier que l'utilisateur n'est pas suspendu
-        user = self.context['request'].user
-        if user.is_suspended:
-            raise serializers.ValidationError("Votre compte est suspendu. Vous ne pouvez pas faire de demande de prêt.")
-        
-        return data
-
-    def create(self, validated_data):
-        items_data = validated_data.pop('items')
-        loan_request = LoanRequest.objects.create(
-            requester=self.context['request'].user,
-            status="PENDING"
-        )
-        
-        for item_data in items_data:
-            LoanRequestItem.objects.create(
-                loan_request=loan_request,
-                **item_data
-            )
-        
-        return loan_request
-
-
-class LoanRequestUpdateSerializer(serializers.ModelSerializer):
+class LoanRequestSecretaryResponseSerializer(serializers.ModelSerializer):
+    """" ce serializer est utilisé par le secrétaire pour approuver ou rejeter une demande de prêt
+        ce serializer ne permet de modifier que le status et le motif de rejet et la datate de prise de decision
+    """
     class Meta:
         model = LoanRequest
         fields = ('status', 'rejection_reason')
         read_only_fields = ('id', 'requester', 'created_at')
 
     def validate(self, data):
+        status=data.get('status',None)
+        reason_reject=data.get('rejection_reason',None)
+        if status not in ['APPROVED', 'REJECTED']:
+            raise serializers.ValidationError("Le statut doit être 'APPROVED' ou 'REJECTED'.")
         # Validation pour le rejet
-        if data.get('status') == 'REJECTED' and not data.get('rejection_reason'):
+        if status == 'REJECTED' and not reason_reject:
             raise serializers.ValidationError("Un motif de rejet est requis.")
         return data
-
+    
+    def update(self, instance, validated_data):
+        instance.status = validated_data.get('status', instance.status)
+        instance.rejection_reason = validated_data.get('rejection_reason', instance.rejection_reason)
+        instance.secretary = self.context['request'].user  # l'utilisateur connecté est le secrétaire
+        instance.decision_at = timezone.now()
+        instance.save()
+        return instance
 
 # ==========================
 # LOAN SERIALIZERS
 # ==========================
 
 class LoanItemSerializer(serializers.ModelSerializer):
-    book_title = serializers.CharField(source='book_copy.book.title', read_only=True)
-    inventory_code = serializers.CharField(source='book_copy.inventory_code', read_only=True)
+    book_title = serializers.CharField(source='book_stock.book.title', read_only=True)
+    language = serializers.CharField(source='book_stock.language', read_only=True)
     condition_out_display = serializers.SerializerMethodField()
     condition_in_display = serializers.SerializerMethodField()
     
@@ -367,7 +454,6 @@ class LoanItemSerializer(serializers.ModelSerializer):
     
     def get_condition_in_display(self, obj):
         return obj.condition_in or "Non retourné"
-
 
 class LoanListSerializer(serializers.ModelSerializer):
     borrower_name = serializers.CharField(source='borrower.get_full_name', read_only=True)
@@ -401,7 +487,6 @@ class LoanListSerializer(serializers.ModelSerializer):
             return (timezone.now().date() - obj.due_date).days
         return 0
 
-
 class LoanDetailSerializer(serializers.ModelSerializer):
     borrower_name = serializers.CharField(source='borrower.get_full_name', read_only=True)
     borrower_username = serializers.CharField(source='borrower.username', read_only=True)
@@ -423,12 +508,10 @@ class LoanDetailSerializer(serializers.ModelSerializer):
         read_only_fields = ('id', 'loan_date')
 
     def get_is_overdue(self, obj):
-        if obj.status == 'ACTIVE' and obj.due_date < timezone.now().date():
-            return True
-        return False
+        return obj.is_overdue
 
     def get_days_overdue(self, obj):
-        if obj.status == 'ACTIVE' and obj.due_date < timezone.now().date():
+        if obj.is_overdue:
             return (timezone.now().date() - obj.due_date).days
         return 0
 
@@ -436,63 +519,72 @@ class LoanDetailSerializer(serializers.ModelSerializer):
         penalties = obj.penalties.all()
         return PenaltySerializer(penalties, many=True).data
 
-
 class LoanCreateSerializer(serializers.ModelSerializer):
-    book_copy_ids = serializers.ListField(
-        child=serializers.UUIDField(),
-        write_only=True
-    )
+    
+    items = LoanRequestItemSerializer(many=True, write_only=True)
 
     class Meta:
         model = Loan
-        fields = ('borrower', 'due_date', 'book_copy_ids')
+        fields = ('borrower', 'due_date', 'items')
         read_only_fields = ('id', 'loan_date', 'secretary', 'status')
 
     def validate(self, data):
+        borrower = data['borrower']
+        
         # Vérifier que l'emprunteur n'est pas suspendu
-        if data['borrower'].is_suspended:
+        if borrower.is_suspended:
             raise serializers.ValidationError("L'emprunteur est suspendu et ne peut pas emprunter de livres.")
         
-        # Vérifier que tous les exemplaires sont disponibles
-        book_copy_ids = data['book_copy_ids']
-        unavailable_copies = BookCopy.objects.filter(
-            id__in=book_copy_ids, 
-            available=False
-        )
-        
-        if unavailable_copies.exists():
-            raise serializers.ValidationError(
-                f"{unavailable_copies.count()} exemplaire(s) ne sont pas disponibles."
-            )
+        # Vérifier la disponibilité des livres
+        for item in data['items']:
+            book = item['book']
+            quantity = item['qty']
+            available_copies = book.available_copies
+            if available_copies < quantity:
+                raise serializers.ValidationError(
+                    f"Pas assez d'exemplaires disponibles pour {book.title}. "
+                    f"Disponible: {available_copies}, Demandé: {quantity}"
+                )
         
         return data
 
     def create(self, validated_data):
-        book_copy_ids = validated_data.pop('book_copy_ids')
+        items_data = validated_data.pop('items')
         loan = Loan.objects.create(
             **validated_data,
             secretary=self.context['request'].user
         )
         
-        # Ajouter les exemplaires au prêt
-        for copy_id in book_copy_ids:
-            book_copy = BookCopy.objects.get(id=copy_id)
+        # Ajouter les items au prêt
+        for item in items_data:
+            book = item['book']
+            quantity = item['qty']
+            
+            # Trouver un stock disponible
+            book_stock = BookStock.objects.filter(
+                book=book, 
+                available_quantity__gte=quantity
+            ).first()
+            
+            if not book_stock:
+                raise serializers.ValidationError(f"Pas assez d'exemplaires disponibles pour {book.title}")
+            
             LoanItem.objects.create(
                 loan=loan,
-                book_copy=book_copy,
+                book_stock=book_stock,
+                qty=quantity,
                 condition_out="Bon état"
             )
-            # Marquer l'exemplaire comme indisponible
-            book_copy.available = False
-            book_copy.save()
+            
+            # Mettre à jour la quantité disponible
+            book_stock.borrow(quantity)
         
         return loan
-
 
 class LoanReturnSerializer(serializers.Serializer):
     condition_in = serializers.DictField(
         child=serializers.CharField(),
-        help_text="Dict with loan_item_id as key and condition description as value"
+        help_text="Dictionnaire avec loan_item_id comme clé et la description de l’état comme valeur."
     )
 
     def validate(self, data):
@@ -511,7 +603,6 @@ class LoanReturnSerializer(serializers.Serializer):
                 raise serializers.ValidationError(f"Item {item_id} n'appartient pas à ce prêt")
         
         return data
-
 
 # ==========================
 # PENALTY SERIALIZERS
@@ -623,35 +714,3 @@ class AuditLogSerializer(serializers.ModelSerializer):
         fields = '__all__'
         read_only_fields = ('id', 'created_at')
 
-
-# ==========================
-# DASHBOARD SERIALIZERS
-# ==========================
-
-class DashboardStatsSerializer(serializers.Serializer):
-    total_books = serializers.IntegerField()
-    total_copies = serializers.IntegerField()
-    available_copies = serializers.IntegerField()
-    total_users = serializers.IntegerField()
-    active_loans = serializers.IntegerField()
-    overdue_loans = serializers.IntegerField()
-    pending_requests = serializers.IntegerField()
-    total_authors = serializers.IntegerField()
-    total_categories = serializers.IntegerField()
-
-
-class ReaderDashboardSerializer(serializers.Serializer):
-    active_loans = serializers.IntegerField()
-    pending_requests = serializers.IntegerField()
-    unpaid_penalties_amount = serializers.DecimalField(max_digits=10, decimal_places=2)
-    recent_loans = LoanListSerializer(many=True)
-    recent_notifications = NotificationSerializer(many=True)
-
-
-class SecretaryDashboardSerializer(serializers.Serializer):
-    pending_requests = serializers.IntegerField()
-    active_loans = serializers.IntegerField()
-    overdue_loans = serializers.IntegerField()
-    recent_requests = LoanRequestListSerializer(many=True)
-    recent_loans = LoanListSerializer(many=True)
-    unpaid_penalties = PenaltySerializer(many=True)
