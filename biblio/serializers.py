@@ -427,11 +427,16 @@ class LoanRequestSecretaryResponseSerializer(serializers.ModelSerializer):
         return data
     
     def update(self, instance, validated_data):
-        instance.status = validated_data.get('status', instance.status)
-        instance.rejection_reason = validated_data.get('rejection_reason', instance.rejection_reason)
-        instance.secretary = self.context['request'].user  # l'utilisateur connecté est le secrétaire
-        instance.decision_at = timezone.now()
-        instance.save()
+        secretary = self.context['request'].user
+
+        status = validated_data.get('status')
+        reason = validated_data.get('rejection_reason')
+
+        if status == "APPROVED":
+            instance.approve(secretary)
+        elif status == "REJECTED":
+            instance.reject(secretary, reason)
+
         return instance
 
 # ==========================

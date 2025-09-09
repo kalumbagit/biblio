@@ -7,15 +7,15 @@ from django.utils import timezone
 from datetime import timedelta
 
 from ..models import (
-     Author, Category, Book, BookCopy, 
-    LoanRequest, LoanRequestItem, Loan, LoanItem,
+     Author, Category, Book,  
+    LoanRequest,  Loan, LoanItem,
     Penalty, Suspension, Notification, AuditLog
 )
 
 from ..serializers import (
     AuthorSerializer, CategorySerializer, BookWriteSerializer, LoanRequestCreateSerializer,BookListSerializer, BookDetailSerializer,
-    LoanRequestDetailSerializer, LoanRequestItemSerializer, LoanRequestUpdateSerializer, LoanItemSerializer,
-    PenaltySerializer, SuspensionSerializer,LoanRequestListSerializer, NotificationSerializer, AuditLogSerializer,LoanRequestSecretaryResponseSerializer
+    LoanRequestDetailSerializer,  LoanRequestUpdateSerializer, LoanItemSerializer,
+    PenaltySerializer,LoanDetailSerializer,LoanReturnSerializer,LoanListSerializer,LoanCreateSerializer ,SuspensionSerializer,LoanRequestListSerializer, NotificationSerializer, AuditLogSerializer,LoanRequestSecretaryResponseSerializer
 )
 
 
@@ -268,59 +268,68 @@ class LoanRequestViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
-# pas encore terminé dans l'implementation^^^^^^^^^^^^^^$$$$$$$$$$$$$$$$$$$$$$$$$
-
 # ==========================
 # LOAN VIEWS
 # ==========================
 
 class LoanViewSet(viewsets.ModelViewSet):
-    serializer_class = LoanSerializer
-    
-    
+    queryset = Loan.objects.all().prefetch_related('items')
+    serializer_class = None  # par défaut
+
+    def get_serializer_class(self):
+        if self.action == 'list':
+            return LoanListSerializer
+        elif self.action == 'retrieve':
+            return LoanDetailSerializer
+        elif self.action == 'create':
+            return LoanCreateSerializer
+        elif self.action in ['update', 'partial_update','return_loan']:
+            return LoanReturnSerializer
+        return LoanListSerializer
+
     def get_queryset(self):
         user = self.request.user
         if user.role in ["SECRETARY", "ADMIN"]:
-            return Loan.objects.all().prefetch_related('items')
-        return Loan.objects.filter(borrower=user).prefetch_related('items')
-    
+            return Loan.objects.all().prefetch_related('items', 'penalties')
+        return Loan.objects.filter(borrower=user).prefetch_related('items', 'penalties')
+
     def get_permissions(self):
         if self.action in ['list', 'retrieve']:
             return [permissions.IsAuthenticated(), IsOwnerOrSecretary()]
         return [IsSecretary()]
-    
-    @action(detail=True, methods=['post'], permission_classes=[IsSecretary])
+
+    @action(detail=True, methods=['post'],
+            permission_classes=[IsSecretary]
+    )
     def return_loan(self, request, pk=None):
         loan = self.get_object()
-        
+
         if loan.status != 'ACTIVE':
             return Response(
                 {'error': 'Ce prêt n\'est pas actif.'},
                 status=status.HTTP_400_BAD_REQUEST
             )
-        
-        # Update items condition and availability
+
+        serializer = LoanReturnSerializer(data=request.data, context={'loan': loan})
+        serializer.is_valid(raise_exception=True)
+
+        # Appliquer les retours
+        condition_in_data = serializer.validated_data['condition_in']
         for item in loan.items.all():
-            condition_in = request.data.get(f'condition_in_{item.id}')
+            condition_in = condition_in_data.get(str(item.id))
             if condition_in:
                 item.condition_in = condition_in
                 item.save()
-            
-            # Make copy available again
-            item.book_copy.available = True
-            item.book_copy.save()
-        
-        # Update loan status
+                # Rendre les exemplaires à nouveau dispo
+                item.book_stock.return_books(item.qty)
+
+        # Mettre à jour le prêt
         loan.return_date = timezone.now().date()
-        
-        # Check if late return
         if loan.due_date < loan.return_date:
             loan.status = "LATE_RETURNED"
-            
-            # Create penalty for late return
             days_late = (loan.return_date - loan.due_date).days
-            penalty_amount = days_late * 0.50  # 0.50€ per day late
-            
+            penalty_amount = days_late * 0.50
+
             Penalty.objects.create(
                 user=loan.borrower,
                 loan=loan,
@@ -331,22 +340,28 @@ class LoanViewSet(viewsets.ModelViewSet):
             )
         else:
             loan.status = "RETURNED"
-        
+
         loan.save()
-        
-        serializer = self.get_serializer(loan)
+
+        return Response(LoanDetailSerializer(loan).data, status=status.HTTP_200_OK)
+
+    @action(
+        detail=True,
+        methods=["get"],
+        permission_classes=[IsSecretary]  # ⚠️ met bien IsSecretary sans parenthèses
+    )
+    def get_loan_items(self, request, pk=None):
+        loan = self.get_object()  # récupère le prêt correspondant à pk
+        items = loan.items.select_related('book_stock__book').all()
+        serializer = LoanItemSerializer(items, many=True)
         return Response(serializer.data)
-
-
-class LoanItemViewSet(viewsets.ModelViewSet):
-    queryset = LoanItem.objects.all().select_related('loan', 'book_copy')
-    serializer_class = LoanItemSerializer
-    permission_classes = [IsSecretary]
-
 
 # ==========================
 # PENALTY & SUSPENSION VIEWS
 # ==========================
+
+# pas encore terminé dans l'implementation^^^^^^^^^^^^^^$$$$$$$$$$$$$$$$$$$$$$$$$
+
 
 class PenaltyViewSet(viewsets.ModelViewSet):
     serializer_class = PenaltySerializer
@@ -419,3 +434,4 @@ class AuditLogViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = AuditLogSerializer
     permission_classes = [IsAdmin]
     filterset_fields = ['action', 'entity_type']
+

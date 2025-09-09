@@ -15,5 +15,34 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path,include
+from rest_framework import routers
 
-urlpatterns = []
+from vues.views import (
+    AuthorViewSet, CategoryViewSet, BookViewSet,
+    LoanRequestViewSet, LoanViewSet,
+    PenaltyViewSet, SuspensionViewSet,
+    NotificationViewSet, AuditLogViewSet
+)
+
+router = routers.DefaultRouter()
+
+# ========== ENTITÉS DE BASE ==========
+router.register(r'authors', AuthorViewSet, basename='author')
+router.register(r'categories', CategoryViewSet, basename='category')
+router.register(r'books', BookViewSet, basename='book')
+
+# ========== DEMANDES & PRÊTS ==========
+router.register(r'loan-requests', LoanRequestViewSet, basename='loan-request')
+router.register(r'loans', LoanViewSet, basename='loan')
+
+# ========== SANCTIONS ==========
+router.register(r'penalties', PenaltyViewSet, basename='penalty')
+router.register(r'suspensions', SuspensionViewSet, basename='suspension')
+
+# ========== NOTIFS & AUDIT ==========
+router.register(r'notifications', NotificationViewSet, basename='notification')
+router.register(r'audit-logs', AuditLogViewSet, basename='audit-log')
+
+urlpatterns = [
+    path('', include(router.urls)),
+]

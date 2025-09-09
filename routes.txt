@@ -1,0 +1,29 @@
+/authors/ → CRUD auteurs
+
+/categories/ → CRUD catégories
+
+/books/ → CRUD livres (avec tes serializers conditionnels)
+
+/loan-requests/
+
+POST /loan-requests/{id}/cancel/
+
+POST /loan-requests/{id}/approve/
+
+POST /loan-requests/{id}/reject/
+
+/loans/
+
+POST /loans/{id}/return_loan/
+
+GET /loans/{id}/get_loan_items/
+
+/penalties/{id}/mark_paid/
+
+/notifications/unread_count/
+
+/notifications/{id}/mark_read/
+
+/notifications/mark_all_read/
+
+/audit-logs/
