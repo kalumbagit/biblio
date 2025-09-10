@@ -6,6 +6,10 @@ from rest_framework.response import Response
 from django.utils import timezone
 from datetime import timedelta
 
+#classes d'authentification
+
+from ..security.authentication import CookieOrTokenJWTAuthentication
+
 from ..models import (
      Author, Category, Book,  
     LoanRequest,  Loan, LoanItem,
@@ -78,12 +82,14 @@ class CustomPagination(pagination.PageNumberPagination):
 class AuthorViewSet(viewsets.ModelViewSet):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
+    authentication_classes = [CookieOrTokenJWTAuthentication]
     permission_classes = [IsSecretary]
     pagination_class=CustomPagination
 
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    authentication_classes = [CookieOrTokenJWTAuthentication]
     permission_classes = [IsSecretary]
     pagination_class=CustomPagination
 
@@ -91,6 +97,7 @@ class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all().prefetch_related('authors', 'category')
     serializer_class = None
     pagination_class=CustomPagination
+    authentication_classes = [CookieOrTokenJWTAuthentication]
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def get_serializer_class(self, *args, **kwargs):
@@ -115,6 +122,7 @@ class BookViewSet(viewsets.ModelViewSet):
 class LoanRequestViewSet(viewsets.ModelViewSet):
 
     serializer_class = None
+    authentication_classes = [CookieOrTokenJWTAuthentication]
 
     def get_queryset(self):
         user = self.request.user
@@ -275,6 +283,7 @@ class LoanRequestViewSet(viewsets.ModelViewSet):
 class LoanViewSet(viewsets.ModelViewSet):
     queryset = Loan.objects.all().prefetch_related('items')
     serializer_class = None  # par défaut
+    authentication_classes = [CookieOrTokenJWTAuthentication]
 
     def get_serializer_class(self):
         if self.action == 'list':
@@ -365,6 +374,7 @@ class LoanViewSet(viewsets.ModelViewSet):
 
 class PenaltyViewSet(viewsets.ModelViewSet):
     serializer_class = PenaltySerializer
+    authentication_classes = [CookieOrTokenJWTAuthentication]
     
     def get_queryset(self):
         user = self.request.user
@@ -393,6 +403,7 @@ class PenaltyViewSet(viewsets.ModelViewSet):
 class SuspensionViewSet(viewsets.ModelViewSet):
     queryset = Suspension.objects.all().select_related('user', 'created_by')
     serializer_class = SuspensionSerializer
+    authentication_classes = [CookieOrTokenJWTAuthentication]
     permission_classes = [IsAdmin, IsSecretary]
 
 
@@ -402,6 +413,7 @@ class SuspensionViewSet(viewsets.ModelViewSet):
 
 class NotificationViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = NotificationSerializer
+    authentication_classes = [CookieOrTokenJWTAuthentication]
     
     def get_queryset(self):
         return Notification.objects.filter(user=self.request.user)
@@ -432,6 +444,7 @@ class NotificationViewSet(viewsets.ReadOnlyModelViewSet):
 class AuditLogViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = AuditLog.objects.all().select_related('actor')
     serializer_class = AuditLogSerializer
+    authentication_classes = [CookieOrTokenJWTAuthentication]
     permission_classes = [IsAdmin]
     filterset_fields = ['action', 'entity_type']
 
