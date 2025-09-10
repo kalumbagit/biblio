@@ -1,0 +1,9 @@
+[
+{"id":"17736549-0be1-409a-99d0-99e4f605f7d2","username":"bodouin","email":"gdgfdf@fdftgdftg.hfhgfhg","first_name":"","last_name":"","role":"ADMIN","role_display":"Administrateur"},
+
+{"id":"f1d3fb33-b2c4-4992-8ad0-348a7371cef7","username":"leo","email":"","first_name":"","last_name":"","role":"READER","role_display":"Lecteur"},
+
+{"id":"1c15f651-539b-4ea4-b5e0-5b38baa0df02","username":"leo1","email":"","first_name":"Leonel","last_name":"Messi","role":"READER","role_display":"Lecteur"},
+
+{"id":"263a6ab3-8aa1-4582-afec-62976f49d7c7","username":"leo2","email":"","first_name":"Leonel","last_name":"Messi 10","role":"ADMIN","role_display":"Administrateur"}
+]

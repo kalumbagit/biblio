@@ -33,10 +33,13 @@ class User(AbstractUser):
 
     def save(self, *args, **kwargs):
         # règle de correspondance automatique
-        if self.is_superuser:
+        if self.is_superuser or self.role == "ADMIN":
             self.role = "ADMIN"
-        elif self.is_staff:
+            self.is_superuser=True
+            self.is_staff=True
+        elif self.is_staff or self.role == "SECRETARY":
             self.role = "SECRETARY"
+            self.is_staff=True
         else:
             self.role = "READER"  # déjà le défaut, mais on force la cohérence
 

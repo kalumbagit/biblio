@@ -4,6 +4,10 @@ from django.utils import timezone
 from django.db.models import Sum
 import uuid
 
+# imports pour personnaliser le token
+from rest_framework_simplejwt.tokens import RefreshToken
+
+
 from .models import (
     User, Author, Category, Book, BookStock, 
     LoanRequest, LoanRequestItem, Loan, LoanItem,
@@ -18,6 +22,8 @@ from .models import (
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField()
+    user = None  # on prépare l’attribut pour stocker l’utilisateur
+
 
     def validate(self, data):
         username = data.get('username')
@@ -27,7 +33,7 @@ class LoginSerializer(serializers.Serializer):
             user = authenticate(username=username, password=password)
             if user:
                 if user.is_active:
-                    data['user'] = user
+                    self.user = user
                 else:
                     raise serializers.ValidationError("Compte désactivé.")
             else:
@@ -35,7 +41,13 @@ class LoginSerializer(serializers.Serializer):
         else:
             raise serializers.ValidationError("Must include 'username' and 'password'.")
 
-        return data
+        # Génération des tokens JWT
+        refresh = RefreshToken.for_user(self.user)
+        return {
+            "access": str(refresh.access_token),
+            "refresh": str(refresh),
+            "user": user,  # on renvoie aussi le user
+        }
 
 class UserSerializer(serializers.ModelSerializer):
     role_display = serializers.CharField(source='get_role_display', read_only=True)
@@ -46,7 +58,7 @@ class UserSerializer(serializers.ModelSerializer):
             'id', 'username', 'email', 'first_name', 'last_name', 
             'role', 'role_display'
         )
-        read_only_fields = ('id')
+        read_only_fields = ['id']
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)

@@ -17,11 +17,15 @@ Including another URLconf
 from django.urls import path,include
 from rest_framework import routers
 
-from vues.views import (
+from .vues.views import (
     AuthorViewSet, CategoryViewSet, BookViewSet,
     LoanRequestViewSet, LoanViewSet,
     PenaltyViewSet, SuspensionViewSet,
     NotificationViewSet, AuditLogViewSet
+)
+
+from .vues.user import (
+    UserViewSet, CustomAuthToken,CookieTokenBlacklistView, CookieTokenRefreshView
 )
 
 router = routers.DefaultRouter()
@@ -45,4 +49,12 @@ router.register(r'audit-logs', AuditLogViewSet, basename='audit-log')
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('auth/login/', CustomAuthToken.as_view(), name='api_token_auth'),
+    path('auth/logout/', CookieTokenBlacklistView.as_view(), name='api_token_blacklist'),
+    path('auth/refresh/', CookieTokenRefreshView.as_view(), name='token_refresh'),
+    path('users/', include(([
+        path('', UserViewSet.as_view({'get': 'list', 'post': 'create'}), name='user-list'),
+        path('<uuid:pk>/', UserViewSet.as_view({'get': 'retrieve', 'put': 'update', 'patch': 'partial_update', 'delete': 'destroy'}), name='user-detail'),
+        path('profile/', UserViewSet.as_view({'get': 'profile'}), name='user-profile'),
+    ], 'users'))),
 ]

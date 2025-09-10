@@ -79,13 +79,13 @@ class AuthorViewSet(viewsets.ModelViewSet):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
     permission_classes = [IsSecretary]
-
+    pagination_class=CustomPagination
 
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     permission_classes = [IsSecretary]
-
+    pagination_class=CustomPagination
 
 class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all().prefetch_related('authors', 'category')
