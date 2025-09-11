@@ -41,7 +41,7 @@ class CookieOrTokenJWTAuthentication(JWTAuthentication):
         try:
             validated_token = self.get_validated_token(token)
             user = self.get_user(validated_token)
-            logger.info(f"User {user.fullname} authentifié via JWT")
+            logger.info(f"User {user.first_name} authentifié via JWT")
             return user, validated_token
         except InvalidToken as e:
             logger.warning(f"Token invalide: {e}")

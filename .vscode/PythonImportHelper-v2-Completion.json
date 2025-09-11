@@ -1,0 +1,1441 @@
+[
+    {
+        "label": "django.contrib.auth.models",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "django.contrib.auth.models",
+        "description": "django.contrib.auth.models",
+        "detail": "django.contrib.auth.models",
+        "documentation": {}
+    },
+    {
+        "label": "AbstractUser",
+        "importPath": "django.contrib.auth.models",
+        "description": "django.contrib.auth.models",
+        "isExtraImport": true,
+        "detail": "django.contrib.auth.models",
+        "documentation": {}
+    },
+    {
+        "label": "django.contrib.auth.validators",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "django.contrib.auth.validators",
+        "description": "django.contrib.auth.validators",
+        "detail": "django.contrib.auth.validators",
+        "documentation": {}
+    },
+    {
+        "label": "django.db.models.deletion",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "django.db.models.deletion",
+        "description": "django.db.models.deletion",
+        "detail": "django.db.models.deletion",
+        "documentation": {}
+    },
+    {
+        "label": "django.utils.timezone",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "django.utils.timezone",
+        "description": "django.utils.timezone",
+        "detail": "django.utils.timezone",
+        "documentation": {}
+    },
+    {
+        "label": "uuid",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "uuid",
+        "description": "uuid",
+        "detail": "uuid",
+        "documentation": {}
+    },
+    {
+        "label": "settings",
+        "importPath": "django.conf",
+        "description": "django.conf",
+        "isExtraImport": true,
+        "detail": "django.conf",
+        "documentation": {}
+    },
+    {
+        "label": "settings",
+        "importPath": "django.conf",
+        "description": "django.conf",
+        "isExtraImport": true,
+        "detail": "django.conf",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "logging",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "logging",
+        "description": "logging",
+        "detail": "logging",
+        "documentation": {}
+    },
+    {
+        "label": "JWTAuthentication",
+        "importPath": "rest_framework_simplejwt.authentication",
+        "description": "rest_framework_simplejwt.authentication",
+        "isExtraImport": true,
+        "detail": "rest_framework_simplejwt.authentication",
+        "documentation": {}
+    },
+    {
+        "label": "InvalidToken",
+        "importPath": "rest_framework_simplejwt.exceptions",
+        "description": "rest_framework_simplejwt.exceptions",
+        "isExtraImport": true,
+        "detail": "rest_framework_simplejwt.exceptions",
+        "documentation": {}
+    },
+    {
+        "label": "AuthenticationFailed",
+        "importPath": "rest_framework.exceptions",
+        "description": "rest_framework.exceptions",
+        "isExtraImport": true,
+        "detail": "rest_framework.exceptions",
+        "documentation": {}
+    },
+    {
+        "label": "BasePermission",
+        "importPath": "rest_framework.permissions",
+        "description": "rest_framework.permissions",
+        "isExtraImport": true,
+        "detail": "rest_framework.permissions",
+        "documentation": {}
+    },
+    {
+        "label": "IsAuthenticated",
+        "importPath": "rest_framework.permissions",
+        "description": "rest_framework.permissions",
+        "isExtraImport": true,
+        "detail": "rest_framework.permissions",
+        "documentation": {}
+    },
+    {
+        "label": "viewsets",
+        "importPath": "rest_framework",
+        "description": "rest_framework",
+        "isExtraImport": true,
+        "detail": "rest_framework",
+        "documentation": {}
+    },
+    {
+        "label": "permissions",
+        "importPath": "rest_framework",
+        "description": "rest_framework",
+        "isExtraImport": true,
+        "detail": "rest_framework",
+        "documentation": {}
+    },
+    {
+        "label": "status",
+        "importPath": "rest_framework",
+        "description": "rest_framework",
+        "isExtraImport": true,
+        "detail": "rest_framework",
+        "documentation": {}
+    },
+    {
+        "label": "exceptions",
+        "importPath": "rest_framework",
+        "description": "rest_framework",
+        "isExtraImport": true,
+        "detail": "rest_framework",
+        "documentation": {}
+    },
+    {
+        "label": "views",
+        "importPath": "rest_framework",
+        "description": "rest_framework",
+        "isExtraImport": true,
+        "detail": "rest_framework",
+        "documentation": {}
+    },
+    {
+        "label": "viewsets",
+        "importPath": "rest_framework",
+        "description": "rest_framework",
+        "isExtraImport": true,
+        "detail": "rest_framework",
+        "documentation": {}
+    },
+    {
+        "label": "pagination",
+        "importPath": "rest_framework",
+        "description": "rest_framework",
+        "isExtraImport": true,
+        "detail": "rest_framework",
+        "documentation": {}
+    },
+    {
+        "label": "response",
+        "importPath": "rest_framework",
+        "description": "rest_framework",
+        "isExtraImport": true,
+        "detail": "rest_framework",
+        "documentation": {}
+    },
+    {
+        "label": "status",
+        "importPath": "rest_framework",
+        "description": "rest_framework",
+        "isExtraImport": true,
+        "detail": "rest_framework",
+        "documentation": {}
+    },
+    {
+        "label": "permissions",
+        "importPath": "rest_framework",
+        "description": "rest_framework",
+        "isExtraImport": true,
+        "detail": "rest_framework",
+        "documentation": {}
+    },
+    {
+        "label": "permissions",
+        "importPath": "rest_framework",
+        "description": "rest_framework",
+        "isExtraImport": true,
+        "detail": "rest_framework",
+        "documentation": {}
+    },
+    {
+        "label": "serializers",
+        "importPath": "rest_framework",
+        "description": "rest_framework",
+        "isExtraImport": true,
+        "detail": "rest_framework",
+        "documentation": {}
+    },
+    {
+        "label": "routers",
+        "importPath": "rest_framework",
+        "description": "rest_framework",
+        "isExtraImport": true,
+        "detail": "rest_framework",
+        "documentation": {}
+    },
+    {
+        "label": "action",
+        "importPath": "rest_framework.decorators",
+        "description": "rest_framework.decorators",
+        "isExtraImport": true,
+        "detail": "rest_framework.decorators",
+        "documentation": {}
+    },
+    {
+        "label": "action",
+        "importPath": "rest_framework.decorators",
+        "description": "rest_framework.decorators",
+        "isExtraImport": true,
+        "detail": "rest_framework.decorators",
+        "documentation": {}
+    },
+    {
+        "label": "Response",
+        "importPath": "rest_framework.response",
+        "description": "rest_framework.response",
+        "isExtraImport": true,
+        "detail": "rest_framework.response",
+        "documentation": {}
+    },
+    {
+        "label": "Response",
+        "importPath": "rest_framework.response",
+        "description": "rest_framework.response",
+        "isExtraImport": true,
+        "detail": "rest_framework.response",
+        "documentation": {}
+    },
+    {
+        "label": "Token",
+        "importPath": "rest_framework.authtoken.models",
+        "description": "rest_framework.authtoken.models",
+        "isExtraImport": true,
+        "detail": "rest_framework.authtoken.models",
+        "documentation": {}
+    },
+    {
+        "label": "TokenObtainPairView",
+        "importPath": "rest_framework_simplejwt.views",
+        "description": "rest_framework_simplejwt.views",
+        "isExtraImport": true,
+        "detail": "rest_framework_simplejwt.views",
+        "documentation": {}
+    },
+    {
+        "label": "TokenRefreshView",
+        "importPath": "rest_framework_simplejwt.views",
+        "description": "rest_framework_simplejwt.views",
+        "isExtraImport": true,
+        "detail": "rest_framework_simplejwt.views",
+        "documentation": {}
+    },
+    {
+        "label": "TokenBlacklistView",
+        "importPath": "rest_framework_simplejwt.views",
+        "description": "rest_framework_simplejwt.views",
+        "isExtraImport": true,
+        "detail": "rest_framework_simplejwt.views",
+        "documentation": {}
+    },
+    {
+        "label": "RefreshToken",
+        "importPath": "rest_framework_simplejwt.tokens",
+        "description": "rest_framework_simplejwt.tokens",
+        "isExtraImport": true,
+        "detail": "rest_framework_simplejwt.tokens",
+        "documentation": {}
+    },
+    {
+        "label": "TokenError",
+        "importPath": "rest_framework_simplejwt.tokens",
+        "description": "rest_framework_simplejwt.tokens",
+        "isExtraImport": true,
+        "detail": "rest_framework_simplejwt.tokens",
+        "documentation": {}
+    },
+    {
+        "label": "RefreshToken",
+        "importPath": "rest_framework_simplejwt.tokens",
+        "description": "rest_framework_simplejwt.tokens",
+        "isExtraImport": true,
+        "detail": "rest_framework_simplejwt.tokens",
+        "documentation": {}
+    },
+    {
+        "label": "timezone",
+        "importPath": "django.utils",
+        "description": "django.utils",
+        "isExtraImport": true,
+        "detail": "django.utils",
+        "documentation": {}
+    },
+    {
+        "label": "timezone",
+        "importPath": "django.utils",
+        "description": "django.utils",
+        "isExtraImport": true,
+        "detail": "django.utils",
+        "documentation": {}
+    },
+    {
+        "label": "timezone",
+        "importPath": "django.utils",
+        "description": "django.utils",
+        "isExtraImport": true,
+        "detail": "django.utils",
+        "documentation": {}
+    },
+    {
+        "label": "timedelta",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "timedelta",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "timedelta",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "admin",
+        "importPath": "django.contrib",
+        "description": "django.contrib",
+        "isExtraImport": true,
+        "detail": "django.contrib",
+        "documentation": {}
+    },
+    {
+        "label": "admin",
+        "importPath": "django.contrib",
+        "description": "django.contrib",
+        "isExtraImport": true,
+        "detail": "django.contrib",
+        "documentation": {}
+    },
+    {
+        "label": "AppConfig",
+        "importPath": "django.apps",
+        "description": "django.apps",
+        "isExtraImport": true,
+        "detail": "django.apps",
+        "documentation": {}
+    },
+    {
+        "label": "authenticate",
+        "importPath": "django.contrib.auth",
+        "description": "django.contrib.auth",
+        "isExtraImport": true,
+        "detail": "django.contrib.auth",
+        "documentation": {}
+    },
+    {
+        "label": "Sum",
+        "importPath": "django.db.models",
+        "description": "django.db.models",
+        "isExtraImport": true,
+        "detail": "django.db.models",
+        "documentation": {}
+    },
+    {
+        "label": "TestCase",
+        "importPath": "django.test",
+        "description": "django.test",
+        "isExtraImport": true,
+        "detail": "django.test",
+        "documentation": {}
+    },
+    {
+        "label": "path",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "include",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "path",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "include",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "get_asgi_application",
+        "importPath": "django.core.asgi",
+        "description": "django.core.asgi",
+        "isExtraImport": true,
+        "detail": "django.core.asgi",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "environ",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "environ",
+        "description": "environ",
+        "detail": "environ",
+        "documentation": {}
+    },
+    {
+        "label": "static",
+        "importPath": "django.conf.urls.static",
+        "description": "django.conf.urls.static",
+        "isExtraImport": true,
+        "detail": "django.conf.urls.static",
+        "documentation": {}
+    },
+    {
+        "label": "get_wsgi_application",
+        "importPath": "django.core.wsgi",
+        "description": "django.core.wsgi",
+        "isExtraImport": true,
+        "detail": "django.core.wsgi",
+        "documentation": {}
+    },
+    {
+        "label": "sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "biblio.migrations.0001_initial",
+        "description": "biblio.migrations.0001_initial",
+        "peekOfCode": "class Migration(migrations.Migration):\n    initial = True\n    dependencies = [\n        ('auth', '0012_alter_user_first_name_max_length'),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='Author',\n            fields=[\n                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),",
+        "detail": "biblio.migrations.0001_initial",
+        "documentation": {}
+    },
+    {
+        "label": "CookieOrTokenJWTAuthentication",
+        "kind": 6,
+        "importPath": "biblio.security.authentication",
+        "description": "biblio.security.authentication",
+        "peekOfCode": "class CookieOrTokenJWTAuthentication(JWTAuthentication):\n    \"\"\"\n    Authentification JWT basée sur un cookie 'access_token' (fallback sur header Authorization).\n    Exemple:\n    - Cookie: `access_token=<JWT>`\n    - Header: `Authorization: Bearer <JWT>`\n    \"\"\"\n    def authenticate(self, request):\n        # 1. Extraction depuis le cookie\n        token = request.COOKIES.get('access_token')",
+        "detail": "biblio.security.authentication",
+        "documentation": {}
+    },
+    {
+        "label": "logger",
+        "kind": 5,
+        "importPath": "biblio.security.authentication",
+        "description": "biblio.security.authentication",
+        "peekOfCode": "logger = logging.getLogger(__name__)\nclass CookieOrTokenJWTAuthentication(JWTAuthentication):\n    \"\"\"\n    Authentification JWT basée sur un cookie 'access_token' (fallback sur header Authorization).\n    Exemple:\n    - Cookie: `access_token=<JWT>`\n    - Header: `Authorization: Bearer <JWT>`\n    \"\"\"\n    def authenticate(self, request):\n        # 1. Extraction depuis le cookie",
+        "detail": "biblio.security.authentication",
+        "documentation": {}
+    },
+    {
+        "label": "AnyOf",
+        "kind": 6,
+        "importPath": "biblio.security.permissions",
+        "description": "biblio.security.permissions",
+        "peekOfCode": "class AnyOf(BasePermission):\n    \"\"\"\n    Autorise l'accès si au moins une des permissions fournies est valide.\n    Supporte les classes de permission et les instances préconfigurées.\n    Exemple:\n    >>> permission_classes = [AnyOf(IsAdmin, IsObjectOwner)]\n    \"\"\"\n    def __init__(self, *perms):\n        self.perms = [perm() if isinstance(perm, type) else perm for perm in perms]\n    def has_permission(self, request, view):",
+        "detail": "biblio.security.permissions",
+        "documentation": {}
+    },
+    {
+        "label": "AllOf",
+        "kind": 6,
+        "importPath": "biblio.security.permissions",
+        "description": "biblio.security.permissions",
+        "peekOfCode": "class AllOf(BasePermission):\n    def __init__(self, *perms):\n        self.perms = [perm() if isinstance(perm, type) else perm for perm in perms]\n    def has_permission(self, request, view):\n        return all(p.has_permission(request, view) for p in self.perms)",
+        "detail": "biblio.security.permissions",
+        "documentation": {}
+    },
+    {
+        "label": "logger",
+        "kind": 5,
+        "importPath": "biblio.security.permissions",
+        "description": "biblio.security.permissions",
+        "peekOfCode": "logger = logging.getLogger(__name__)\nclass AnyOf(BasePermission):\n    \"\"\"\n    Autorise l'accès si au moins une des permissions fournies est valide.\n    Supporte les classes de permission et les instances préconfigurées.\n    Exemple:\n    >>> permission_classes = [AnyOf(IsAdmin, IsObjectOwner)]\n    \"\"\"\n    def __init__(self, *perms):\n        self.perms = [perm() if isinstance(perm, type) else perm for perm in perms]",
+        "detail": "biblio.security.permissions",
+        "documentation": {}
+    },
+    {
+        "label": "CustomAuthToken",
+        "kind": 6,
+        "importPath": "biblio.vues.user",
+        "description": "biblio.vues.user",
+        "peekOfCode": "class CustomAuthToken(TokenObtainPairView):\n    \"\"\"\n    Custom JWT token obtain view that sets tokens in secure HTTP-only cookies.\n    Inherits from TokenObtainPairView and adds cookie handling functionality.\n    Uses LoginSerializer for credential validation.\n    \"\"\"\n    serializer_class = LoginSerializer\n    def post(self, request, *args, **kwargs):\n        \"\"\"\n        Handle POST request for token generation.",
+        "detail": "biblio.vues.user",
+        "documentation": {}
+    },
+    {
+        "label": "CookieTokenRefreshView",
+        "kind": 6,
+        "importPath": "biblio.vues.user",
+        "description": "biblio.vues.user",
+        "peekOfCode": "class CookieTokenRefreshView(TokenRefreshView):\n    \"\"\"\n    Custom JWT token refresh view that retrieves refresh token from cookie or header.\n    Extends TokenRefreshView to support cookie-based token refresh flow.\n    \"\"\"\n    def post(self, request, *args, **kwargs):\n        \"\"\"\n        Handle POST request for token refresh.\n        1. Extracts refresh token from cookie or header\n        2. Validates and processes refresh token",
+        "detail": "biblio.vues.user",
+        "documentation": {}
+    },
+    {
+        "label": "CookieTokenBlacklistView",
+        "kind": 6,
+        "importPath": "biblio.vues.user",
+        "description": "biblio.vues.user",
+        "peekOfCode": "class CookieTokenBlacklistView(views.APIView):\n    \"\"\"\n    JWT token revocation endpoint that handles cookie-based logout.\n    This view:\n    1. Extracts refresh token from cookie/header\n    2. Blacklists the token\n    3. Clears auth cookies from client\n    Note: Uses 205 Reset Content status to indicate successful logout with\n    cookie clearing instructions.\n    \"\"\"",
+        "detail": "biblio.vues.user",
+        "documentation": {}
+    },
+    {
+        "label": "UserViewSet",
+        "kind": 6,
+        "importPath": "biblio.vues.user",
+        "description": "biblio.vues.user",
+        "peekOfCode": "class UserViewSet(viewsets.ModelViewSet):\n    \"\"\" cette classe donne à l'admin le droit de voir tous les enregistrements,\n        mais : chaque utilisateur doit pouvoir effectuer son crud personnel\n    \"\"\"\n    queryset = User.objects.all()\n    serializer_class = UserSerializer\n    permission_classes = [IsAdmin]\n    def get_serializer_class(self):\n        if self.action == 'create':\n            return UserRegistrationSerializer",
+        "detail": "biblio.vues.user",
+        "documentation": {}
+    },
+    {
+        "label": "extract_refresh_token",
+        "kind": 2,
+        "importPath": "biblio.vues.user",
+        "description": "biblio.vues.user",
+        "peekOfCode": "def extract_refresh_token(request):\n    \"\"\"\n    Extract the refresh token from either cookie or authorization header.\n    Args:\n        request: HttpRequest object containing cookies and headers\n    Returns:\n        str: The refresh token if found, None otherwise\n    Note:\n        Priority is given to cookie storage, with header as fallback.\n        Header format should be: 'X-Refresh-Token: Bearer <token>'",
+        "detail": "biblio.vues.user",
+        "documentation": {}
+    },
+    {
+        "label": "CustomPagination",
+        "kind": 6,
+        "importPath": "biblio.vues.views",
+        "description": "biblio.vues.views",
+        "peekOfCode": "class CustomPagination(pagination.PageNumberPagination):\n    # Paramètres configurables\n    page_size = 20  # Valeur par défaut\n    page_size_query_param = 'page_size'  # Paramètre pour changer la taille de page\n    max_page_size = 100  # Taille maximale autorisée\n    page_query_param = 'page'  # Paramètre pour spécifier le numéro de page\n    def get_paginated_response(self, data):\n        return response.Response({\n            'links': {\n                'next': self.get_next_link(),",
+        "detail": "biblio.vues.views",
+        "documentation": {}
+    },
+    {
+        "label": "AuthorViewSet",
+        "kind": 6,
+        "importPath": "biblio.vues.views",
+        "description": "biblio.vues.views",
+        "peekOfCode": "class AuthorViewSet(viewsets.ModelViewSet):\n    queryset = Author.objects.all()\n    serializer_class = AuthorSerializer\n    authentication_classes = [CookieOrTokenJWTAuthentication]\n    permission_classes = [IsSecretary]\n    pagination_class=CustomPagination\nclass CategoryViewSet(viewsets.ModelViewSet):\n    queryset = Category.objects.all()\n    serializer_class = CategorySerializer\n    authentication_classes = [CookieOrTokenJWTAuthentication]",
+        "detail": "biblio.vues.views",
+        "documentation": {}
+    },
+    {
+        "label": "CategoryViewSet",
+        "kind": 6,
+        "importPath": "biblio.vues.views",
+        "description": "biblio.vues.views",
+        "peekOfCode": "class CategoryViewSet(viewsets.ModelViewSet):\n    queryset = Category.objects.all()\n    serializer_class = CategorySerializer\n    authentication_classes = [CookieOrTokenJWTAuthentication]\n    permission_classes = [IsSecretary]\n    pagination_class=CustomPagination\nclass BookViewSet(viewsets.ModelViewSet):\n    queryset = Book.objects.all().prefetch_related('authors', 'category')\n    serializer_class = None\n    pagination_class=CustomPagination",
+        "detail": "biblio.vues.views",
+        "documentation": {}
+    },
+    {
+        "label": "BookViewSet",
+        "kind": 6,
+        "importPath": "biblio.vues.views",
+        "description": "biblio.vues.views",
+        "peekOfCode": "class BookViewSet(viewsets.ModelViewSet):\n    queryset = Book.objects.all().prefetch_related('authors', 'category')\n    serializer_class = None\n    pagination_class=CustomPagination\n    authentication_classes = [CookieOrTokenJWTAuthentication]\n    permission_classes = [permissions.IsAuthenticatedOrReadOnly]\n    def get_serializer_class(self, *args, **kwargs):\n        if self.action in [\"create\", \"update\", \"partial_update\"]:\n            return BookWriteSerializer\n        elif self.action == \"list\":",
+        "detail": "biblio.vues.views",
+        "documentation": {}
+    },
+    {
+        "label": "LoanRequestViewSet",
+        "kind": 6,
+        "importPath": "biblio.vues.views",
+        "description": "biblio.vues.views",
+        "peekOfCode": "class LoanRequestViewSet(viewsets.ModelViewSet):\n    serializer_class = None\n    authentication_classes = [CookieOrTokenJWTAuthentication]\n    def get_queryset(self):\n        user = self.request.user\n        queryset = LoanRequest.objects.all().select_related(\"requester\", \"secretary\").prefetch_related(\"items\", \"items__book\")\n        if user.role in [\"SECRETARY\", \"ADMIN\"]:\n            return queryset\n        return queryset.filter(requester=user)\n    def get_serializer_class(self):",
+        "detail": "biblio.vues.views",
+        "documentation": {}
+    },
+    {
+        "label": "LoanViewSet",
+        "kind": 6,
+        "importPath": "biblio.vues.views",
+        "description": "biblio.vues.views",
+        "peekOfCode": "class LoanViewSet(viewsets.ModelViewSet):\n    queryset = Loan.objects.all().prefetch_related('items')\n    serializer_class = None  # par défaut\n    authentication_classes = [CookieOrTokenJWTAuthentication]\n    def get_serializer_class(self):\n        if self.action == 'list':\n            return LoanListSerializer\n        elif self.action == 'retrieve':\n            return LoanDetailSerializer\n        elif self.action == 'create':",
+        "detail": "biblio.vues.views",
+        "documentation": {}
+    },
+    {
+        "label": "PenaltyViewSet",
+        "kind": 6,
+        "importPath": "biblio.vues.views",
+        "description": "biblio.vues.views",
+        "peekOfCode": "class PenaltyViewSet(viewsets.ModelViewSet):\n    serializer_class = PenaltySerializer\n    authentication_classes = [CookieOrTokenJWTAuthentication]\n    def get_queryset(self):\n        user = self.request.user\n        if user.role in [\"SECRETARY\", \"ADMIN\"]:\n            return Penalty.objects.all().select_related('user', 'loan')\n        return Penalty.objects.filter(user=user).select_related('user', 'loan')\n    def get_permissions(self):\n        if self.action in ['list', 'retrieve']:",
+        "detail": "biblio.vues.views",
+        "documentation": {}
+    },
+    {
+        "label": "SuspensionViewSet",
+        "kind": 6,
+        "importPath": "biblio.vues.views",
+        "description": "biblio.vues.views",
+        "peekOfCode": "class SuspensionViewSet(viewsets.ModelViewSet):\n    queryset = Suspension.objects.all().select_related('user', 'created_by')\n    serializer_class = SuspensionSerializer\n    authentication_classes = [CookieOrTokenJWTAuthentication]\n    permission_classes = [IsAdmin, IsSecretary]\n# ==========================\n# NOTIFICATION & AUDIT VIEWS\n# ==========================\nclass NotificationViewSet(viewsets.ReadOnlyModelViewSet):\n    serializer_class = NotificationSerializer",
+        "detail": "biblio.vues.views",
+        "documentation": {}
+    },
+    {
+        "label": "NotificationViewSet",
+        "kind": 6,
+        "importPath": "biblio.vues.views",
+        "description": "biblio.vues.views",
+        "peekOfCode": "class NotificationViewSet(viewsets.ReadOnlyModelViewSet):\n    serializer_class = NotificationSerializer\n    authentication_classes = [CookieOrTokenJWTAuthentication]\n    def get_queryset(self):\n        return Notification.objects.filter(user=self.request.user)\n    @action(detail=False, methods=['get'])\n    def unread_count(self, request):\n        count = Notification.objects.filter(user=request.user, read_at__isnull=True).count()\n        return Response({'count': count})\n    @action(detail=True, methods=['post'])",
+        "detail": "biblio.vues.views",
+        "documentation": {}
+    },
+    {
+        "label": "AuditLogViewSet",
+        "kind": 6,
+        "importPath": "biblio.vues.views",
+        "description": "biblio.vues.views",
+        "peekOfCode": "class AuditLogViewSet(viewsets.ReadOnlyModelViewSet):\n    queryset = AuditLog.objects.all().select_related('actor')\n    serializer_class = AuditLogSerializer\n    authentication_classes = [CookieOrTokenJWTAuthentication]\n    permission_classes = [IsAdmin]\n    filterset_fields = ['action', 'entity_type']",
+        "detail": "biblio.vues.views",
+        "documentation": {}
+    },
+    {
+        "label": "create_audit_log",
+        "kind": 2,
+        "importPath": "biblio.vues.views",
+        "description": "biblio.vues.views",
+        "peekOfCode": "def create_audit_log(actor, action, entity_type, entity_id, old_value=None, new_value=None):\n    \"\"\"Helper function to create audit logs\"\"\"\n    AuditLog.objects.create(\n        actor=actor,\n        action=action,\n        entity_type=entity_type,\n        entity_id=entity_id,\n        old_value=old_value,\n        new_value=new_value\n    )",
+        "detail": "biblio.vues.views",
+        "documentation": {}
+    },
+    {
+        "label": "BiblioConfig",
+        "kind": 6,
+        "importPath": "biblio.apps",
+        "description": "biblio.apps",
+        "peekOfCode": "class BiblioConfig(AppConfig):\n    default_auto_field = 'django.db.models.BigAutoField'\n    name = 'biblio'",
+        "detail": "biblio.apps",
+        "documentation": {}
+    },
+    {
+        "label": "User",
+        "kind": 6,
+        "importPath": "biblio.models",
+        "description": "biblio.models",
+        "peekOfCode": "class User(AbstractUser):\n    \"\"\"\n    Utilisateur de la plateforme.\n    Peut être :\n      - Lecteur (emprunteur de livres)\n      - Secrétaire (gère les prêts, validations, sanctions)\n      - Admin (supervision, paramétrages)\n    \"\"\"\n    ROLE_CHOICES = [\n        (\"READER\", \"Lecteur\"),",
+        "detail": "biblio.models",
+        "documentation": {}
+    },
+    {
+        "label": "Author",
+        "kind": 6,
+        "importPath": "biblio.models",
+        "description": "biblio.models",
+        "peekOfCode": "class Author(models.Model):\n    \"\"\"Auteur d’un ou plusieurs livres\"\"\"\n    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)\n    full_name = models.CharField(max_length=120)\n    birth_date = models.DateField(null=True, blank=True)\n    death_date = models.DateField(null=True, blank=True)\n    def __str__(self):\n        return self.full_name\nclass Category(models.Model):\n    \"\"\"Catégorie ou genre littéraire (Roman, Essai, BD, etc.)\"\"\"",
+        "detail": "biblio.models",
+        "documentation": {}
+    },
+    {
+        "label": "Category",
+        "kind": 6,
+        "importPath": "biblio.models",
+        "description": "biblio.models",
+        "peekOfCode": "class Category(models.Model):\n    \"\"\"Catégorie ou genre littéraire (Roman, Essai, BD, etc.)\"\"\"\n    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)\n    name = models.CharField(max_length=80, unique=True)\n    description = models.TextField(blank=True, null=True)\n    def __str__(self):\n        return self.name\nclass Book(models.Model):\n    \"\"\"Ouvrage bibliographique (indépendant des exemplaires physiques)\"\"\"\n    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)",
+        "detail": "biblio.models",
+        "documentation": {}
+    },
+    {
+        "label": "Book",
+        "kind": 6,
+        "importPath": "biblio.models",
+        "description": "biblio.models",
+        "peekOfCode": "class Book(models.Model):\n    \"\"\"Ouvrage bibliographique (indépendant des exemplaires physiques)\"\"\"\n    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)\n    isbn = models.CharField(max_length=20, unique=True, blank=True, null=True)\n    title = models.CharField(max_length=200)\n    image_couverture = models.ImageField(\n        upload_to='livres/',   # dossier de stockage dans MEDIA_ROOT\n        null=True,             # facultatif : autoriser l'absence d'image\n        blank=True             # facultatif : champ non obligatoire\n    )",
+        "detail": "biblio.models",
+        "documentation": {}
+    },
+    {
+        "label": "BookStock",
+        "kind": 6,
+        "importPath": "biblio.models",
+        "description": "biblio.models",
+        "peekOfCode": "class BookStock(models.Model):\n    \"\"\"Stock d’exemplaires physiques pour une langue donnée\"\"\"\n    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)\n    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name=\"stocks\")\n    language = models.CharField(max_length=10, help_text=\"Code langue ISO 639-1\", default=\"fr\")\n    total_quantity = models.PositiveIntegerField(default=1)\n    available_quantity = models.PositiveIntegerField(default=1)\n    condition_note = models.CharField(max_length=255, blank=True, null=True)\n    def __str__(self):\n        return f\"{self.book.title} ({self.language}) [{self.available_quantity}/{self.total_quantity}]\"",
+        "detail": "biblio.models",
+        "documentation": {}
+    },
+    {
+        "label": "LoanRequest",
+        "kind": 6,
+        "importPath": "biblio.models",
+        "description": "biblio.models",
+        "peekOfCode": "class LoanRequest(models.Model):\n    \"\"\"Demande d'emprunt soumise par un lecteur\"\"\"\n    STATUS_CHOICES = [\n        (\"PENDING\", \"En attente\"),\n        (\"APPROVED\", \"Approuvée\"),\n        (\"REJECTED\", \"Rejetée\"),\n        (\"CANCELED\", \"Annulée\"),\n    ]\n    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)\n    requester = models.ForeignKey(User, on_delete=models.CASCADE, related_name=\"loan_requests\")",
+        "detail": "biblio.models",
+        "documentation": {}
+    },
+    {
+        "label": "LoanRequestItem",
+        "kind": 6,
+        "importPath": "biblio.models",
+        "description": "biblio.models",
+        "peekOfCode": "class LoanRequestItem(models.Model):\n    \"\"\"Livre(s) demandé(s) dans une demande de prêt\"\"\"\n    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)\n    loan_request = models.ForeignKey(LoanRequest, on_delete=models.CASCADE, related_name=\"items\")\n    book_stock = models.ForeignKey(BookStock, on_delete=models.CASCADE, related_name=\"requested_items\")\n    qty = models.PositiveIntegerField(default=1)\n    def __str__(self):\n        return f\"{self.book_stock.book.title} ({self.book_stock.language}) x{self.qty}\"\n# ==========================\n# LOANS",
+        "detail": "biblio.models",
+        "documentation": {}
+    },
+    {
+        "label": "Loan",
+        "kind": 6,
+        "importPath": "biblio.models",
+        "description": "biblio.models",
+        "peekOfCode": "class Loan(models.Model):\n    \"\"\"Emprunt validé et remis au lecteur\"\"\"\n    STATUS_CHOICES = [\n        (\"ACTIVE\", \"En cours\"),\n        (\"RETURNED\", \"Rendu\"),\n        (\"LATE_RETURNED\", \"Rendu en retard\"),\n        (\"LOST\", \"Perdu\"),\n    ]\n    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)\n    borrower = models.ForeignKey(User, on_delete=models.CASCADE, related_name=\"loans\")",
+        "detail": "biblio.models",
+        "documentation": {}
+    },
+    {
+        "label": "LoanItem",
+        "kind": 6,
+        "importPath": "biblio.models",
+        "description": "biblio.models",
+        "peekOfCode": "class LoanItem(models.Model):\n    \"\"\"Exemplaire spécifique inclus dans un emprunt\"\"\"\n    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)\n    loan = models.ForeignKey(Loan, on_delete=models.CASCADE, related_name=\"items\")\n    book_stock = models.ForeignKey(BookStock, on_delete=models.CASCADE, related_name=\"loan_items\")\n    qty = models.PositiveIntegerField(default=1)\n    condition_out = models.CharField(max_length=255, blank=True, null=True)  # État au prêt\n    condition_in = models.CharField(max_length=255, blank=True, null=True)   # État au retour\n    def __str__(self):\n        return f\"{self.book_stock.book.title} (x{self.qty}) for Loan {self.loan.id}\"",
+        "detail": "biblio.models",
+        "documentation": {}
+    },
+    {
+        "label": "Penalty",
+        "kind": 6,
+        "importPath": "biblio.models",
+        "description": "biblio.models",
+        "peekOfCode": "class Penalty(models.Model):\n    \"\"\"Sanction appliquée pour retard, perte ou dégradation\"\"\"\n    REASON_CHOICES = [\n        (\"LATE_RETURN\", \"Retard\"),\n        (\"LOST_ITEM\", \"Perte\"),\n        (\"DAMAGED_ITEM\", \"Dégradation\"),\n    ]\n    PAYMENT_STATUS_CHOICES = [\n        (\"UNPAID\", \"Non payé\"),\n        (\"PAID\", \"Payé\"),",
+        "detail": "biblio.models",
+        "documentation": {}
+    },
+    {
+        "label": "Suspension",
+        "kind": 6,
+        "importPath": "biblio.models",
+        "description": "biblio.models",
+        "peekOfCode": "class Suspension(models.Model):\n    \"\"\"Suspension temporaire d’un utilisateur après trop de pénalités\"\"\"\n    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)\n    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name=\"suspensions\")\n    start_date = models.DateField()\n    end_date = models.DateField()\n    reason = models.CharField(max_length=255)\n    created_by = models.ForeignKey(\n        User, on_delete=models.SET_NULL, null=True, blank=True, related_name=\"suspensions_created\"\n    )",
+        "detail": "biblio.models",
+        "documentation": {}
+    },
+    {
+        "label": "Notification",
+        "kind": 6,
+        "importPath": "biblio.models",
+        "description": "biblio.models",
+        "peekOfCode": "class Notification(models.Model):\n    \"\"\"Messages envoyés aux utilisateurs (approbation, rejet, rappel, etc.)\"\"\"\n    TYPE_CHOICES = [\n        (\"APPROVAL\", \"Demande approuvée\"),\n        (\"REJECTION\", \"Demande rejetée\"),\n        (\"DUE_REMINDER\", \"Rappel de retour\"),\n        (\"PENALTY\", \"Notification de pénalité\"),\n        (\"SUSPENSION\", \"Notification de suspension\"),\n    ]\n    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)",
+        "detail": "biblio.models",
+        "documentation": {}
+    },
+    {
+        "label": "AuditLog",
+        "kind": 6,
+        "importPath": "biblio.models",
+        "description": "biblio.models",
+        "peekOfCode": "class AuditLog(models.Model):\n    \"\"\"Historique des actions effectuées (traçabilité)\"\"\"\n    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)\n    actor = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name=\"audit_logs\")\n    action = models.CharField(max_length=50)  # Exemple : REQUEST_APPROVED, LOAN_CREATED\n    entity_type = models.CharField(max_length=50)  # Exemple : LoanRequest, Loan\n    entity_id = models.UUIDField()\n    old_value = models.JSONField(null=True, blank=True)\n    new_value = models.JSONField(null=True, blank=True)\n    created_at = models.DateTimeField(auto_now_add=True)",
+        "detail": "biblio.models",
+        "documentation": {}
+    },
+    {
+        "label": "RETURN_DATE_DELAY",
+        "kind": 5,
+        "importPath": "biblio.models",
+        "description": "biblio.models",
+        "peekOfCode": "RETURN_DATE_DELAY = 14 # jours\nclass User(AbstractUser):\n    \"\"\"\n    Utilisateur de la plateforme.\n    Peut être :\n      - Lecteur (emprunteur de livres)\n      - Secrétaire (gère les prêts, validations, sanctions)\n      - Admin (supervision, paramétrages)\n    \"\"\"\n    ROLE_CHOICES = [",
+        "detail": "biblio.models",
+        "documentation": {}
+    },
+    {
+        "label": "IsAdmin",
+        "kind": 6,
+        "importPath": "biblio.permissions",
+        "description": "biblio.permissions",
+        "peekOfCode": "class IsAdmin(permissions.BasePermission):\n    def has_permission(self, request, view):\n        return request.user.is_authenticated and request.user.role == \"ADMIN\"\nclass IsSecretary(permissions.BasePermission):\n    def has_permission(self, request, view):\n        return request.user.is_authenticated and (\n            request.user.role == \"SECRETARY\" or request.user.role == \"ADMIN\"\n        )\nclass IsReader(permissions.BasePermission):\n    def has_permission(self, request, view):",
+        "detail": "biblio.permissions",
+        "documentation": {}
+    },
+    {
+        "label": "IsSecretary",
+        "kind": 6,
+        "importPath": "biblio.permissions",
+        "description": "biblio.permissions",
+        "peekOfCode": "class IsSecretary(permissions.BasePermission):\n    def has_permission(self, request, view):\n        return request.user.is_authenticated and (\n            request.user.role == \"SECRETARY\" or request.user.role == \"ADMIN\"\n        )\nclass IsReader(permissions.BasePermission):\n    def has_permission(self, request, view):\n        return request.user.is_authenticated and request.user.role == \"READER\"\nclass IsOwnerOrSecretary(permissions.BasePermission):\n    def has_object_permission(self, request, view, obj):",
+        "detail": "biblio.permissions",
+        "documentation": {}
+    },
+    {
+        "label": "IsReader",
+        "kind": 6,
+        "importPath": "biblio.permissions",
+        "description": "biblio.permissions",
+        "peekOfCode": "class IsReader(permissions.BasePermission):\n    def has_permission(self, request, view):\n        return request.user.is_authenticated and request.user.role == \"READER\"\nclass IsOwnerOrSecretary(permissions.BasePermission):\n    def has_object_permission(self, request, view, obj):\n        if hasattr(obj, 'requester'):\n            return obj.requester == request.user or request.user.role in [\"SECRETARY\", \"ADMIN\"]\n        elif hasattr(obj, 'borrower'):\n            return obj.borrower == request.user or request.user.role in [\"SECRETARY\", \"ADMIN\"]\n        elif hasattr(obj, 'user'):",
+        "detail": "biblio.permissions",
+        "documentation": {}
+    },
+    {
+        "label": "IsOwnerOrSecretary",
+        "kind": 6,
+        "importPath": "biblio.permissions",
+        "description": "biblio.permissions",
+        "peekOfCode": "class IsOwnerOrSecretary(permissions.BasePermission):\n    def has_object_permission(self, request, view, obj):\n        if hasattr(obj, 'requester'):\n            return obj.requester == request.user or request.user.role in [\"SECRETARY\", \"ADMIN\"]\n        elif hasattr(obj, 'borrower'):\n            return obj.borrower == request.user or request.user.role in [\"SECRETARY\", \"ADMIN\"]\n        elif hasattr(obj, 'user'):\n            return obj.user == request.user or request.user.role in [\"SECRETARY\", \"ADMIN\"]\n        return False",
+        "detail": "biblio.permissions",
+        "documentation": {}
+    },
+    {
+        "label": "LoginSerializer",
+        "kind": 6,
+        "importPath": "biblio.serializers",
+        "description": "biblio.serializers",
+        "peekOfCode": "class LoginSerializer(serializers.Serializer):\n    username = serializers.CharField()\n    password = serializers.CharField()\n    user = None  # on prépare l’attribut pour stocker l’utilisateur\n    def validate(self, data):\n        username = data.get('username')\n        password = data.get('password')\n        if username and password:\n            user = authenticate(username=username, password=password)\n            if user:",
+        "detail": "biblio.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "UserSerializer",
+        "kind": 6,
+        "importPath": "biblio.serializers",
+        "description": "biblio.serializers",
+        "peekOfCode": "class UserSerializer(serializers.ModelSerializer):\n    role_display = serializers.CharField(source='get_role_display', read_only=True)\n    class Meta:\n        model = User\n        fields = (\n            'id', 'username', 'email', 'first_name', 'last_name', \n            'role', 'role_display'\n        )\n        read_only_fields = ['id']\nclass UserRegistrationSerializer(serializers.ModelSerializer):",
+        "detail": "biblio.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "UserRegistrationSerializer",
+        "kind": 6,
+        "importPath": "biblio.serializers",
+        "description": "biblio.serializers",
+        "peekOfCode": "class UserRegistrationSerializer(serializers.ModelSerializer):\n    password = serializers.CharField(write_only=True)\n    password_confirm = serializers.CharField(write_only=True)\n    class Meta:\n        model = User\n        fields = ('id', 'username', 'email', 'first_name', 'last_name', 'password', 'password_confirm', 'role')\n        extra_kwargs = {\n            'password': {'write_only': True},\n            'role': {'required': False}\n        }",
+        "detail": "biblio.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "UserProfileSerializer",
+        "kind": 6,
+        "importPath": "biblio.serializers",
+        "description": "biblio.serializers",
+        "peekOfCode": "class UserProfileSerializer(serializers.ModelSerializer):\n    role_display = serializers.CharField(source='get_role_display', read_only=True)\n    active_loans_count = serializers.SerializerMethodField()\n    pending_requests_count = serializers.SerializerMethodField()\n    unpaid_penalties_amount = serializers.SerializerMethodField()\n    class Meta:\n        model = User\n        fields = (\n            'id', 'username', 'email', 'first_name', 'last_name', \n            'role', 'role_display', 'is_suspended', 'suspension_start', ",
+        "detail": "biblio.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "AuthorSerializer",
+        "kind": 6,
+        "importPath": "biblio.serializers",
+        "description": "biblio.serializers",
+        "peekOfCode": "class AuthorSerializer(serializers.ModelSerializer):\n    books_count = serializers.SerializerMethodField()\n    class Meta:\n        model = Author\n        fields = '__all__'\n        read_only_fields = ('id',)\n    def get_books_count(self, obj):\n        return obj.books.count()\nclass CategorySerializer(serializers.ModelSerializer):\n    books_count = serializers.SerializerMethodField()",
+        "detail": "biblio.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "CategorySerializer",
+        "kind": 6,
+        "importPath": "biblio.serializers",
+        "description": "biblio.serializers",
+        "peekOfCode": "class CategorySerializer(serializers.ModelSerializer):\n    books_count = serializers.SerializerMethodField()\n    class Meta:\n        model = Category\n        fields = '__all__'\n        read_only_fields = ('id',)\n    def get_books_count(self, obj):\n        return obj.books.count()\n#===========================\n# BOOK SERIALIZERS",
+        "detail": "biblio.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "BookListSerializer",
+        "kind": 6,
+        "importPath": "biblio.serializers",
+        "description": "biblio.serializers",
+        "peekOfCode": "class BookListSerializer(serializers.ModelSerializer):\n    authors = serializers.StringRelatedField(many=True)\n    category = serializers.StringRelatedField()\n    available_copies = serializers.IntegerField(read_only=True)\n    class Meta:\n        model = Book\n        fields = (\n            'id', 'isbn', 'title', 'image_couverture', 'summary', \n            'publisher', 'publication_year', \n            'authors', 'category', 'available_copies', 'is_available'",
+        "detail": "biblio.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "BookDetailSerializer",
+        "kind": 6,
+        "importPath": "biblio.serializers",
+        "description": "biblio.serializers",
+        "peekOfCode": "class BookDetailSerializer(serializers.ModelSerializer):\n    authors = AuthorSerializer(many=True, read_only=True)\n    category = CategorySerializer(many=True, read_only=True)\n    available_copies = serializers.IntegerField(read_only=True)\n    stocks = serializers.SerializerMethodField()\n    class Meta:\n        model = Book\n        fields = (\n            'id', 'isbn', 'title', 'image_couverture', 'summary', \n            'publisher', 'publication_year', ",
+        "detail": "biblio.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "BookStockNestedSerializer",
+        "kind": 6,
+        "importPath": "biblio.serializers",
+        "description": "biblio.serializers",
+        "peekOfCode": "class BookStockNestedSerializer(serializers.ModelSerializer):\n    \"\"\"Serializer utilisé pour créer ou modifier les stocks liés au livre.\"\"\"\n    class Meta:\n        model = BookStock\n        fields = ('id', 'language', 'total_quantity', 'available_quantity', 'condition_note')\n        read_only_fields = ('id',)\nclass BookWriteSerializer(serializers.ModelSerializer):\n    author_ids = serializers.ListField(\n        child=serializers.UUIDField(),\n        write_only=True,",
+        "detail": "biblio.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "BookWriteSerializer",
+        "kind": 6,
+        "importPath": "biblio.serializers",
+        "description": "biblio.serializers",
+        "peekOfCode": "class BookWriteSerializer(serializers.ModelSerializer):\n    author_ids = serializers.ListField(\n        child=serializers.UUIDField(),\n        write_only=True,\n        required=False\n    )\n    category_id = serializers.UUIDField(\n        write_only=True,\n        required=False\n    )",
+        "detail": "biblio.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "BookStockSerializer",
+        "kind": 6,
+        "importPath": "biblio.serializers",
+        "description": "biblio.serializers",
+        "peekOfCode": "class BookStockSerializer(serializers.ModelSerializer):\n    book_title = serializers.CharField(source='book.title', read_only=True)\n    book_isbn = serializers.CharField(source='book.isbn', read_only=True)\n    class Meta:\n        model = BookStock\n        fields = '__all__'\n        read_only_fields = ('id', 'added_at')\n# ==========================\n# LOAN REQUEST SERIALIZERS\n# ==========================",
+        "detail": "biblio.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "LoanRequestItemSerializer",
+        "kind": 6,
+        "importPath": "biblio.serializers",
+        "description": "biblio.serializers",
+        "peekOfCode": "class LoanRequestItemSerializer(serializers.ModelSerializer): # item d'une demande de pret\n    book_title = serializers.CharField(source='book.title', read_only=True)\n    class Meta:\n        model = LoanRequestItem\n        fields = [\"id\", \"book\", \"book_title\", \"qty\"]\n        read_only_fields = (\"id\",)\nclass LoanRequestUpdateSerializer(serializers.ModelSerializer):\n    \"\"\"\n    Permet à l'utilisateur (lecteur) d'annuler sa demande\n    ou de modifier les livres demandés tant qu'elle est en attente.",
+        "detail": "biblio.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "LoanRequestUpdateSerializer",
+        "kind": 6,
+        "importPath": "biblio.serializers",
+        "description": "biblio.serializers",
+        "peekOfCode": "class LoanRequestUpdateSerializer(serializers.ModelSerializer):\n    \"\"\"\n    Permet à l'utilisateur (lecteur) d'annuler sa demande\n    ou de modifier les livres demandés tant qu'elle est en attente.\n    \"\"\"\n    items = LoanRequestItemSerializer(many=True, required=False)\n    class Meta:\n        model = LoanRequest\n        fields = (\"status\", \"items\")\n        read_only_fields = (\"id\", \"requester\", \"created_at\", \"decision_at\", \"secretary\", \"rejection_reason\")",
+        "detail": "biblio.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "LoanRequestCreateSerializer",
+        "kind": 6,
+        "importPath": "biblio.serializers",
+        "description": "biblio.serializers",
+        "peekOfCode": "class LoanRequestCreateSerializer(serializers.ModelSerializer):\n    items = LoanRequestItemSerializer(many=True, write_only=True)\n    requester = serializers.HiddenField(default=serializers.CurrentUserDefault())\n    class Meta:\n        model = LoanRequest\n        fields = [\n            \"id\",\n            \"requester\",\n            \"status\",\n            \"items\",",
+        "detail": "biblio.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "LoanRequestListSerializer",
+        "kind": 6,
+        "importPath": "biblio.serializers",
+        "description": "biblio.serializers",
+        "peekOfCode": "class LoanRequestListSerializer(serializers.ModelSerializer):\n    requester_name = serializers.CharField(source='requester.get_full_name', read_only=True)\n    requester_username = serializers.CharField(source='requester.username', read_only=True)\n    status_display = serializers.CharField(source='get_status_display', read_only=True)\n    items_count = serializers.SerializerMethodField()\n    class Meta:\n        model = LoanRequest\n        fields = (\n            'id', 'requester', 'requester_name', 'requester_username', \n            'status', 'status_display', 'rejection_reason', 'secretary',",
+        "detail": "biblio.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "LoanRequestDetailSerializer",
+        "kind": 6,
+        "importPath": "biblio.serializers",
+        "description": "biblio.serializers",
+        "peekOfCode": "class LoanRequestDetailSerializer(serializers.ModelSerializer):\n    requester_name = serializers.CharField(source='requester.get_full_name', read_only=True)\n    requester_username = serializers.CharField(source='requester.username', read_only=True)\n    status_display = serializers.CharField(source='get_status_display', read_only=True)\n    secretary_name = serializers.CharField(source='secretary.get_full_name', read_only=True, allow_null=True)\n    items = LoanRequestItemSerializer(many=True, read_only=True)\n    class Meta:\n        model = LoanRequest\n        fields = (\n            'id', 'requester', 'requester_name', 'requester_username', ",
+        "detail": "biblio.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "LoanRequestSecretaryResponseSerializer",
+        "kind": 6,
+        "importPath": "biblio.serializers",
+        "description": "biblio.serializers",
+        "peekOfCode": "class LoanRequestSecretaryResponseSerializer(serializers.ModelSerializer):\n    \"\"\"\" ce serializer est utilisé par le secrétaire pour approuver ou rejeter une demande de prêt\n        ce serializer ne permet de modifier que le status et le motif de rejet et la datate de prise de decision\n    \"\"\"\n    class Meta:\n        model = LoanRequest\n        fields = ('status', 'rejection_reason')\n        read_only_fields = ('id', 'requester', 'created_at')\n    def validate(self, data):\n        status=data.get('status',None)",
+        "detail": "biblio.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "LoanItemSerializer",
+        "kind": 6,
+        "importPath": "biblio.serializers",
+        "description": "biblio.serializers",
+        "peekOfCode": "class LoanItemSerializer(serializers.ModelSerializer):\n    book_title = serializers.CharField(source='book_stock.book.title', read_only=True)\n    language = serializers.CharField(source='book_stock.language', read_only=True)\n    condition_out_display = serializers.SerializerMethodField()\n    condition_in_display = serializers.SerializerMethodField()\n    class Meta:\n        model = LoanItem\n        fields = '__all__'\n        read_only_fields = ('id', 'loan')\n    def get_condition_out_display(self, obj):",
+        "detail": "biblio.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "LoanListSerializer",
+        "kind": 6,
+        "importPath": "biblio.serializers",
+        "description": "biblio.serializers",
+        "peekOfCode": "class LoanListSerializer(serializers.ModelSerializer):\n    borrower_name = serializers.CharField(source='borrower.get_full_name', read_only=True)\n    borrower_username = serializers.CharField(source='borrower.username', read_only=True)\n    secretary_name = serializers.CharField(source='secretary.get_full_name', read_only=True, allow_null=True)\n    status_display = serializers.CharField(source='get_status_display', read_only=True)\n    items_count = serializers.SerializerMethodField()\n    is_overdue = serializers.SerializerMethodField()\n    days_overdue = serializers.SerializerMethodField()\n    class Meta:\n        model = Loan",
+        "detail": "biblio.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "LoanDetailSerializer",
+        "kind": 6,
+        "importPath": "biblio.serializers",
+        "description": "biblio.serializers",
+        "peekOfCode": "class LoanDetailSerializer(serializers.ModelSerializer):\n    borrower_name = serializers.CharField(source='borrower.get_full_name', read_only=True)\n    borrower_username = serializers.CharField(source='borrower.username', read_only=True)\n    secretary_name = serializers.CharField(source='secretary.get_full_name', read_only=True, allow_null=True)\n    status_display = serializers.CharField(source='get_status_display', read_only=True)\n    items = LoanItemSerializer(many=True, read_only=True)\n    is_overdue = serializers.SerializerMethodField()\n    days_overdue = serializers.SerializerMethodField()\n    penalties = serializers.SerializerMethodField()\n    class Meta:",
+        "detail": "biblio.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "LoanCreateSerializer",
+        "kind": 6,
+        "importPath": "biblio.serializers",
+        "description": "biblio.serializers",
+        "peekOfCode": "class LoanCreateSerializer(serializers.ModelSerializer):\n    items = LoanRequestItemSerializer(many=True, write_only=True)\n    class Meta:\n        model = Loan\n        fields = ('borrower', 'due_date', 'items')\n        read_only_fields = ('id', 'loan_date', 'secretary', 'status')\n    def validate(self, data):\n        borrower = data['borrower']\n        # Vérifier que l'emprunteur n'est pas suspendu\n        if borrower.is_suspended:",
+        "detail": "biblio.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "LoanReturnSerializer",
+        "kind": 6,
+        "importPath": "biblio.serializers",
+        "description": "biblio.serializers",
+        "peekOfCode": "class LoanReturnSerializer(serializers.Serializer):\n    condition_in = serializers.DictField(\n        child=serializers.CharField(),\n        help_text=\"Dictionnaire avec loan_item_id comme clé et la description de l’état comme valeur.\"\n    )\n    def validate(self, data):\n        loan = self.context['loan']\n        condition_in = data.get('condition_in', {})\n        # Vérifier que tous les items du prêt sont présents\n        loan_item_ids = loan.items.values_list('id', flat=True)",
+        "detail": "biblio.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "PenaltySerializer",
+        "kind": 6,
+        "importPath": "biblio.serializers",
+        "description": "biblio.serializers",
+        "peekOfCode": "class PenaltySerializer(serializers.ModelSerializer):\n    user_name = serializers.CharField(source='user.get_full_name', read_only=True)\n    user_username = serializers.CharField(source='user.username', read_only=True)\n    reason_display = serializers.CharField(source='get_reason_display', read_only=True)\n    payment_status_display = serializers.CharField(source='get_payment_status_display', read_only=True)\n    validated_by_name = serializers.CharField(source='validated_by.get_full_name', read_only=True, allow_null=True)\n    loan_info = serializers.SerializerMethodField()\n    class Meta:\n        model = Penalty\n        fields = '__all__'",
+        "detail": "biblio.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "PenaltyCreateSerializer",
+        "kind": 6,
+        "importPath": "biblio.serializers",
+        "description": "biblio.serializers",
+        "peekOfCode": "class PenaltyCreateSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Penalty\n        fields = ('user', 'loan', 'reason', 'days_late', 'amount', 'note')\n        read_only_fields = ('id', 'created_at', 'payment_status')\nclass PenaltyUpdateSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Penalty\n        fields = ('payment_status', 'note')\n        read_only_fields = ('id', 'user', 'loan', 'reason', 'days_late', 'amount', 'created_at')",
+        "detail": "biblio.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "PenaltyUpdateSerializer",
+        "kind": 6,
+        "importPath": "biblio.serializers",
+        "description": "biblio.serializers",
+        "peekOfCode": "class PenaltyUpdateSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Penalty\n        fields = ('payment_status', 'note')\n        read_only_fields = ('id', 'user', 'loan', 'reason', 'days_late', 'amount', 'created_at')\n# ==========================\n# SUSPENSION SERIALIZERS\n# ==========================\nclass SuspensionSerializer(serializers.ModelSerializer):\n    user_name = serializers.CharField(source='user.get_full_name', read_only=True)",
+        "detail": "biblio.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "SuspensionSerializer",
+        "kind": 6,
+        "importPath": "biblio.serializers",
+        "description": "biblio.serializers",
+        "peekOfCode": "class SuspensionSerializer(serializers.ModelSerializer):\n    user_name = serializers.CharField(source='user.get_full_name', read_only=True)\n    user_username = serializers.CharField(source='user.username', read_only=True)\n    created_by_name = serializers.CharField(source='created_by.get_full_name', read_only=True)\n    is_active = serializers.SerializerMethodField()\n    class Meta:\n        model = Suspension\n        fields = '__all__'\n        read_only_fields = ('id', 'created_at', 'created_by')\n    def get_is_active(self, obj):",
+        "detail": "biblio.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "SuspensionCreateSerializer",
+        "kind": 6,
+        "importPath": "biblio.serializers",
+        "description": "biblio.serializers",
+        "peekOfCode": "class SuspensionCreateSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Suspension\n        fields = ('user', 'start_date', 'end_date', 'reason')\n        read_only_fields = ('id', 'created_at', 'created_by')\n    def validate(self, data):\n        if data['start_date'] > data['end_date']:\n            raise serializers.ValidationError(\"La date de début doit être avant la date de fin.\")\n        return data\n# ==========================",
+        "detail": "biblio.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "NotificationSerializer",
+        "kind": 6,
+        "importPath": "biblio.serializers",
+        "description": "biblio.serializers",
+        "peekOfCode": "class NotificationSerializer(serializers.ModelSerializer):\n    type_display = serializers.CharField(source='get_type_display', read_only=True)\n    is_read = serializers.SerializerMethodField()\n    class Meta:\n        model = Notification\n        fields = '__all__'\n        read_only_fields = ('id', 'created_at', 'sent_at')\n    def get_is_read(self, obj):\n        return obj.read_at is not None\nclass NotificationCreateSerializer(serializers.ModelSerializer):",
+        "detail": "biblio.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "NotificationCreateSerializer",
+        "kind": 6,
+        "importPath": "biblio.serializers",
+        "description": "biblio.serializers",
+        "peekOfCode": "class NotificationCreateSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Notification\n        fields = ('user', 'type', 'title', 'message', 'channel')\n        read_only_fields = ('id', 'created_at', 'sent_at', 'read_at')\n# ==========================\n# AUDIT LOG SERIALIZERS\n# ==========================\nclass AuditLogSerializer(serializers.ModelSerializer):\n    actor_name = serializers.CharField(source='actor.get_full_name', read_only=True)",
+        "detail": "biblio.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "AuditLogSerializer",
+        "kind": 6,
+        "importPath": "biblio.serializers",
+        "description": "biblio.serializers",
+        "peekOfCode": "class AuditLogSerializer(serializers.ModelSerializer):\n    actor_name = serializers.CharField(source='actor.get_full_name', read_only=True)\n    actor_username = serializers.CharField(source='actor.username', read_only=True)\n    class Meta:\n        model = AuditLog\n        fields = '__all__'\n        read_only_fields = ('id', 'created_at')",
+        "detail": "biblio.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "router",
+        "kind": 5,
+        "importPath": "biblio.urls",
+        "description": "biblio.urls",
+        "peekOfCode": "router = routers.DefaultRouter()\n# ========== ENTITÉS DE BASE ==========\nrouter.register(r'authors', AuthorViewSet, basename='author')\nrouter.register(r'categories', CategoryViewSet, basename='category')\nrouter.register(r'books', BookViewSet, basename='book')\n# ========== DEMANDES & PRÊTS ==========\nrouter.register(r'loan-requests', LoanRequestViewSet, basename='loan-request')\nrouter.register(r'loans', LoanViewSet, basename='loan')\n# ========== SANCTIONS ==========\nrouter.register(r'penalties', PenaltyViewSet, basename='penalty')",
+        "detail": "biblio.urls",
+        "documentation": {}
+    },
+    {
+        "label": "urlpatterns",
+        "kind": 5,
+        "importPath": "biblio.urls",
+        "description": "biblio.urls",
+        "peekOfCode": "urlpatterns = [\n    path('', include(router.urls)),\n    path('auth/login/', CustomAuthToken.as_view(), name='api_token_auth'),\n    path('auth/logout/', CookieTokenBlacklistView.as_view(), name='api_token_blacklist'),\n    path('auth/refresh/', CookieTokenRefreshView.as_view(), name='token_refresh'),\n    path('users/', include(([\n        path('', UserViewSet.as_view({'get': 'list', 'post': 'create'}), name='user-list'),\n        path('<uuid:pk>/', UserViewSet.as_view({'get': 'retrieve', 'put': 'update', 'patch': 'partial_update', 'delete': 'destroy'}), name='user-detail'),\n        path('profile/', UserViewSet.as_view({'get': 'profile'}), name='user-profile'),\n    ], 'users'))),",
+        "detail": "biblio.urls",
+        "documentation": {}
+    },
+    {
+        "label": "application",
+        "kind": 5,
+        "importPath": "config.asgi",
+        "description": "config.asgi",
+        "peekOfCode": "application = get_asgi_application()",
+        "detail": "config.asgi",
+        "documentation": {}
+    },
+    {
+        "label": "env",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "env = environ.Env()\nenviron.Env.read_env()\n# ========================================================================================\n# 📂 BASE DU PROJET\n# ========================================================================================\n# BASE_DIR pointe vers le dossier racine du projet\nBASE_DIR = Path(__file__).resolve().parent.parent\n# ========================================================================================\n# 🔐 CONFIGURATION SÉCURITÉ\n# ========================================================================================",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "BASE_DIR",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "BASE_DIR = Path(__file__).resolve().parent.parent\n# ========================================================================================\n# 🔐 CONFIGURATION SÉCURITÉ\n# ========================================================================================\nSECRET_KEY = env(\"SECRET_KEY\")  # ⚠️ À garder secret en production\nDEBUG = env.bool(\"DEBUG\", default=True)  # True en dev, False en prod\nALLOWED_HOSTS = env.list(\"ALLOWED_HOSTS\", default=[])  # Domaines autorisés pour la prod\n# ========================================================================================\n# 📦 APPLICATIONS\n# ========================================================================================",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "SECRET_KEY",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "SECRET_KEY = env(\"SECRET_KEY\")  # ⚠️ À garder secret en production\nDEBUG = env.bool(\"DEBUG\", default=True)  # True en dev, False en prod\nALLOWED_HOSTS = env.list(\"ALLOWED_HOSTS\", default=[])  # Domaines autorisés pour la prod\n# ========================================================================================\n# 📦 APPLICATIONS\n# ========================================================================================\nINSTALLED_APPS = [\n    # Applications Django natives (core)\n    'django.contrib.admin',\n    'django.contrib.auth',",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "DEBUG",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "DEBUG = env.bool(\"DEBUG\", default=True)  # True en dev, False en prod\nALLOWED_HOSTS = env.list(\"ALLOWED_HOSTS\", default=[])  # Domaines autorisés pour la prod\n# ========================================================================================\n# 📦 APPLICATIONS\n# ========================================================================================\nINSTALLED_APPS = [\n    # Applications Django natives (core)\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "ALLOWED_HOSTS",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "ALLOWED_HOSTS = env.list(\"ALLOWED_HOSTS\", default=[])  # Domaines autorisés pour la prod\n# ========================================================================================\n# 📦 APPLICATIONS\n# ========================================================================================\nINSTALLED_APPS = [\n    # Applications Django natives (core)\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "INSTALLED_APPS",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "INSTALLED_APPS = [\n    # Applications Django natives (core)\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',\n    # Applications tierces (externes)\n    'rest_framework',       # API REST",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "MIDDLEWARE",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "MIDDLEWARE = [\n    'django.middleware.security.SecurityMiddleware',\n    'django.contrib.sessions.middleware.SessionMiddleware',\n    # CORS doit être placé avant CommonMiddleware (cf. doc django-cors-headers)\n    'corsheaders.middleware.CorsMiddleware',\n    'django.middleware.common.CommonMiddleware',\n    'django.middleware.csrf.CsrfViewMiddleware',\n    'django.contrib.auth.middleware.AuthenticationMiddleware',\n    'django.contrib.messages.middleware.MessageMiddleware',\n    'django.middleware.clickjacking.XFrameOptionsMiddleware',",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "REST_FRAMEWORK",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "REST_FRAMEWORK = {\n    'DEFAULT_AUTHENTICATION_CLASSES': (\n        'rest_framework_simplejwt.authentication.JWTAuthentication',\n    )\n}\n# Backends d'authentification disponibles, tous les backends personnalisés doivent etre mis en premier avant celui qui est là\nAUTHENTICATION_BACKENDS = [\n    'django.contrib.auth.backends.ModelBackend',\n]\n# Configuration de JWT (durée de vie et options)",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "AUTHENTICATION_BACKENDS",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "AUTHENTICATION_BACKENDS = [\n    'django.contrib.auth.backends.ModelBackend',\n]\n# Configuration de JWT (durée de vie et options)\nSIMPLE_JWT = {\n    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=env.int(\"ACCESS_TOKEN_LIFETIME\", default=5)),\n    'REFRESH_TOKEN_LIFETIME': timedelta(days=env.int(\"REFRESH_TOKEN_LIFETIME\", default=1)),\n    'ROTATE_REFRESH_TOKENS': env.bool(\"ROTATE_REFRESH_TOKENS\", default=False),\n    'BLACKLIST_AFTER_ROTATION': env.bool(\"BLACKLIST_AFTER_ROTATION\", default=True),\n    'AUTH_HEADER_TYPES': ('Bearer',),",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "SIMPLE_JWT",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "SIMPLE_JWT = {\n    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=env.int(\"ACCESS_TOKEN_LIFETIME\", default=5)),\n    'REFRESH_TOKEN_LIFETIME': timedelta(days=env.int(\"REFRESH_TOKEN_LIFETIME\", default=1)),\n    'ROTATE_REFRESH_TOKENS': env.bool(\"ROTATE_REFRESH_TOKENS\", default=False),\n    'BLACKLIST_AFTER_ROTATION': env.bool(\"BLACKLIST_AFTER_ROTATION\", default=True),\n    'AUTH_HEADER_TYPES': ('Bearer',),\n}\n# ========================================================================================\n# 🌐 CORS (Cross-Origin Resource Sharing)\n# ========================================================================================",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "CORS_ALLOWED_ORIGINS",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "CORS_ALLOWED_ORIGINS = env.list(\"CORS_ALLOWED_ORIGINS\", default=[])\n# ========================================================================================\n# 🌍 ROUTAGE & TEMPLATES\n# ========================================================================================\nROOT_URLCONF = 'config.urls'\nTEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': [],   # Répertoires supplémentaires de templates (si besoin)\n        'APP_DIRS': True,  # Recherche auto dans les répertoires \"templates\" des apps",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "ROOT_URLCONF",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "ROOT_URLCONF = 'config.urls'\nTEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': [],   # Répertoires supplémentaires de templates (si besoin)\n        'APP_DIRS': True,  # Recherche auto dans les répertoires \"templates\" des apps\n        'OPTIONS': {\n            'context_processors': [\n                'django.template.context_processors.request',  # Injection auto des infos de requête\n                'django.contrib.auth.context_processors.auth', # Infos utilisateur",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "TEMPLATES",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "TEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': [],   # Répertoires supplémentaires de templates (si besoin)\n        'APP_DIRS': True,  # Recherche auto dans les répertoires \"templates\" des apps\n        'OPTIONS': {\n            'context_processors': [\n                'django.template.context_processors.request',  # Injection auto des infos de requête\n                'django.contrib.auth.context_processors.auth', # Infos utilisateur\n                'django.contrib.messages.context_processors.messages',",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "WSGI_APPLICATION",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "WSGI_APPLICATION = 'config.wsgi.application'\n# ========================================================================================\n# 🗄️ BASE DE DONNÉES\n# ========================================================================================\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.sqlite3',  # ⚠️ Dev uniquement — utiliser Postgres/MySQL en prod\n        'NAME': BASE_DIR / 'db.sqlite3',\n    }\n}",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "DATABASES",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "DATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.sqlite3',  # ⚠️ Dev uniquement — utiliser Postgres/MySQL en prod\n        'NAME': BASE_DIR / 'db.sqlite3',\n    }\n}\n# ========================================================================================\n# 🔐 VALIDATION DES MOTS DE PASSE\n# ========================================================================================\nAUTH_PASSWORD_VALIDATORS = [",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "AUTH_PASSWORD_VALIDATORS",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "AUTH_PASSWORD_VALIDATORS = [\n    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},\n    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},   # Longueur minimale\n    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'}, # Pas de mots de passe trop communs\n    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},# Pas de mot de passe uniquement numérique\n]\n# ========================================================================================\n# 🌐 LOCALISATION\n# ========================================================================================\nLANGUAGE_CODE = 'fr'           # Langue par défaut : Français",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "LANGUAGE_CODE",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "LANGUAGE_CODE = 'fr'           # Langue par défaut : Français\nTIME_ZONE = 'Africa/Douala'    # Fuseau horaire : Cameroun\nUSE_I18N = True                # Internationalisation activée\nUSE_TZ = True                  # Utilisation du temps UTC interne (recommandée)\n# ========================================================================================\n# 🗂️ FICHIERS STATIQUES & MÉDIAS\n# ========================================================================================\n# Fichiers statiques (CSS, JS, images non-uploadées)\nSTATIC_URL = 'static/'\n# Fichiers uploadés par les utilisateurs (images, docs…)",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "TIME_ZONE",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "TIME_ZONE = 'Africa/Douala'    # Fuseau horaire : Cameroun\nUSE_I18N = True                # Internationalisation activée\nUSE_TZ = True                  # Utilisation du temps UTC interne (recommandée)\n# ========================================================================================\n# 🗂️ FICHIERS STATIQUES & MÉDIAS\n# ========================================================================================\n# Fichiers statiques (CSS, JS, images non-uploadées)\nSTATIC_URL = 'static/'\n# Fichiers uploadés par les utilisateurs (images, docs…)\nMEDIA_URL = '/media/'",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "USE_I18N",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "USE_I18N = True                # Internationalisation activée\nUSE_TZ = True                  # Utilisation du temps UTC interne (recommandée)\n# ========================================================================================\n# 🗂️ FICHIERS STATIQUES & MÉDIAS\n# ========================================================================================\n# Fichiers statiques (CSS, JS, images non-uploadées)\nSTATIC_URL = 'static/'\n# Fichiers uploadés par les utilisateurs (images, docs…)\nMEDIA_URL = '/media/'\nMEDIA_ROOT = os.path.join(BASE_DIR, 'media')",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "USE_TZ",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "USE_TZ = True                  # Utilisation du temps UTC interne (recommandée)\n# ========================================================================================\n# 🗂️ FICHIERS STATIQUES & MÉDIAS\n# ========================================================================================\n# Fichiers statiques (CSS, JS, images non-uploadées)\nSTATIC_URL = 'static/'\n# Fichiers uploadés par les utilisateurs (images, docs…)\nMEDIA_URL = '/media/'\nMEDIA_ROOT = os.path.join(BASE_DIR, 'media')\n# ========================================================================================",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "STATIC_URL",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "STATIC_URL = 'static/'\n# Fichiers uploadés par les utilisateurs (images, docs…)\nMEDIA_URL = '/media/'\nMEDIA_ROOT = os.path.join(BASE_DIR, 'media')\n# ========================================================================================\n# 🗝️ CLÉ PRIMAIRE PAR DÉFAUT\n# ========================================================================================\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\n#=======================================================================================\n# 👤 MODÈLE D’UTILISATEUR PERSONNALISÉ",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "MEDIA_URL",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "MEDIA_URL = '/media/'\nMEDIA_ROOT = os.path.join(BASE_DIR, 'media')\n# ========================================================================================\n# 🗝️ CLÉ PRIMAIRE PAR DÉFAUT\n# ========================================================================================\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\n#=======================================================================================\n# 👤 MODÈLE D’UTILISATEUR PERSONNALISÉ\n#=======================================================================================\n# Permet d’utiliser un modèle User personnalisé défini dans l’application 'biblio'",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "MEDIA_ROOT",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "MEDIA_ROOT = os.path.join(BASE_DIR, 'media')\n# ========================================================================================\n# 🗝️ CLÉ PRIMAIRE PAR DÉFAUT\n# ========================================================================================\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\n#=======================================================================================\n# 👤 MODÈLE D’UTILISATEUR PERSONNALISÉ\n#=======================================================================================\n# Permet d’utiliser un modèle User personnalisé défini dans l’application 'biblio'\nAUTH_USER_MODEL = \"biblio.User\"",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "DEFAULT_AUTO_FIELD",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\n#=======================================================================================\n# 👤 MODÈLE D’UTILISATEUR PERSONNALISÉ\n#=======================================================================================\n# Permet d’utiliser un modèle User personnalisé défini dans l’application 'biblio'\nAUTH_USER_MODEL = \"biblio.User\"",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "AUTH_USER_MODEL",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "AUTH_USER_MODEL = \"biblio.User\"",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "urlpatterns",
+        "kind": 5,
+        "importPath": "config.urls",
+        "description": "config.urls",
+        "peekOfCode": "urlpatterns = [\n    path('admin/', admin.site.urls),\n    path('api/', include('biblio.urls')),  # inclure les URLs de l'application biblio\n]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT) # cette ligne n'est utile qu'en dev, en prod c'est le serveur web (nginx, apache) qui sert les fichiers statiques et media",
+        "detail": "config.urls",
+        "documentation": {}
+    },
+    {
+        "label": "application",
+        "kind": 5,
+        "importPath": "config.wsgi",
+        "description": "config.wsgi",
+        "peekOfCode": "application = get_wsgi_application()",
+        "detail": "config.wsgi",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "manage",
+        "description": "manage",
+        "peekOfCode": "def main():\n    \"\"\"Run administrative tasks.\"\"\"\n    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')\n    try:\n        from django.core.management import execute_from_command_line\n    except ImportError as exc:\n        raise ImportError(\n            \"Couldn't import Django. Are you sure it's installed and \"\n            \"available on your PYTHONPATH environment variable? Did you \"\n            \"forget to activate a virtual environment?\"",
+        "detail": "manage",
+        "documentation": {}
+    }
+]

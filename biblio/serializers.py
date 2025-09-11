@@ -159,8 +159,7 @@ class BookListSerializer(serializers.ModelSerializer):
 
 class BookDetailSerializer(serializers.ModelSerializer):
     authors = AuthorSerializer(many=True, read_only=True)
-    category = CategorySerializer(many=True, read_only=True)
-    available_copies = serializers.IntegerField(read_only=True)
+    category = CategorySerializer(read_only=True)
     stocks = serializers.SerializerMethodField()
 
     class Meta:
@@ -168,9 +167,9 @@ class BookDetailSerializer(serializers.ModelSerializer):
         fields = (
             'id', 'isbn', 'title', 'image_couverture', 'summary', 
             'publisher', 'publication_year', 
-            'authors', 'category', 'available_copies', 'is_available', 'stocks'
+            'authors', 'category',  'is_available', 'stocks'
         )
-        read_only_fields = ('id', 'available_copies', 'is_available')
+        read_only_fields = ('id','is_available')
 
     def get_stocks(self, obj):
         stocks = obj.stocks.all()
@@ -189,39 +188,44 @@ class BookWriteSerializer(serializers.ModelSerializer):
         write_only=True,
         required=False
     )
-    category_id = serializers.UUIDField(
+    category = serializers.JSONField(  # <-- peut recevoir soit un UUID, soit un dict
         write_only=True,
-        required=False
+        required=True
     )
-    # stocks passés en même temps que la création du livre
-    stocks = BookStockNestedSerializer(many=True, write_only=True, required=False)
+    stocks = BookStockNestedSerializer(many=True, write_only=True, required=True)
 
     class Meta:
         model = Book
         fields = (
             'id', 'isbn', 'title', 'image_couverture', 'summary',
             'publisher', 'publication_year',
-            'author_ids', 'category_id', 'stocks'
+            'author_ids', 'category', 'stocks'
         )
         read_only_fields = ('id',)
+    
+    def validate_stocks(self, value):
+        """Vérifie qu’au moins une copie est fournie"""
+        if not value or len(value) == 0:
+            raise serializers.ValidationError("Au moins une copie (stock) doit être fournie.")
+        return value
 
     def create(self, validated_data):
         author_ids = validated_data.pop('author_ids', [])
-        category_id = validated_data.pop('category_id', None)
+        category_data = validated_data.pop('category')
         stocks_data = validated_data.pop('stocks', [])
 
-        book = Book.objects.create(**validated_data)
+        # Gestion de la catégorie
+        if isinstance(category_data, dict):
+            category = Category.objects.create(**category_data)
+        else:
+            category = Category.objects.get(id=category_data)
 
-        # Add authors
+        book = Book.objects.create(category=category, **validated_data)
+
+        # Ajouter les auteurs
         if author_ids:
             authors = Author.objects.filter(id__in=author_ids)
             book.authors.set(authors)
-
-        # Add category
-        if category_id:
-            category = Category.objects.get(id=category_id)
-            book.category = category
-            book.save()
 
         # Créer les stocks
         for stock_data in stocks_data:
@@ -231,7 +235,7 @@ class BookWriteSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         author_ids = validated_data.pop('author_ids', None)
-        category_id = validated_data.pop('category_id', None)
+        category_data = validated_data.pop('category', None)
         stocks_data = validated_data.pop('stocks', None)
 
         # Update champs simples
@@ -245,17 +249,19 @@ class BookWriteSerializer(serializers.ModelSerializer):
             instance.authors.set(authors)
 
         # Update catégorie
-        if category_id is not None:
-            category = Category.objects.get(id=category_id)
+        if category_data is not None:
+            if isinstance(category_data, dict):
+                category = Category.objects.create(**category_data)
+            else:
+                category = Category.objects.get(id=category_data)
             instance.category = category
             instance.save()
 
-        # Update stocks si fournis
+        # Update stocks
         if stocks_data is not None:
             for stock_data in stocks_data:
                 stock_id = stock_data.get("id", None)
-                if stock_id:  
-                    # Mise à jour d'un stock existant
+                if stock_id:
                     try:
                         stock = instance.stocks.get(id=stock_id)
                         for attr, value in stock_data.items():
@@ -264,7 +270,6 @@ class BookWriteSerializer(serializers.ModelSerializer):
                     except BookStock.DoesNotExist:
                         continue
                 else:
-                    # Création d'un nouveau stock
                     BookStock.objects.create(book=instance, **stock_data)
 
         return instance
@@ -283,11 +288,11 @@ class BookStockSerializer(serializers.ModelSerializer):
 # ==========================
 
 class LoanRequestItemSerializer(serializers.ModelSerializer): # item d'une demande de pret
-    book_title = serializers.CharField(source='book.title', read_only=True)
+    book_title = serializers.CharField(source='book_stock.book.title', read_only=True)
     
     class Meta:
         model = LoanRequestItem
-        fields = ["id", "book", "book_title", "qty"]
+        fields = ["id", "book_stock", "book_title", "qty"]
         read_only_fields = ("id",)
 
 class LoanRequestUpdateSerializer(serializers.ModelSerializer):

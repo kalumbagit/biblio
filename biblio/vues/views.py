@@ -98,7 +98,7 @@ class BookViewSet(viewsets.ModelViewSet):
     serializer_class = None
     pagination_class=CustomPagination
     authentication_classes = [CookieOrTokenJWTAuthentication]
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
 
     def get_serializer_class(self, *args, **kwargs):
         if self.action in ["create", "update", "partial_update"]:
@@ -112,8 +112,9 @@ class BookViewSet(viewsets.ModelViewSet):
     
     def get_permissions(self):
         if self.action in ['list', 'retrieve']:
-            return [] # accès public
-        return [IsSecretary()]
+            return [] # accessible à tous les utilisateurs
+        else:
+            return [IsSecretary()]
 
 # ==========================
 # LOAN REQUEST VIEWS
@@ -359,7 +360,7 @@ class LoanViewSet(viewsets.ModelViewSet):
         methods=["get"],
         permission_classes=[IsSecretary]  # ⚠️ met bien IsSecretary sans parenthèses
     )
-    def get_loan_items(self, request, pk=None):
+    def get_loan_item(self, request, pk=None):
         loan = self.get_object()  # récupère le prêt correspondant à pk
         items = loan.items.select_related('book_stock__book').all()
         serializer = LoanItemSerializer(items, many=True)
