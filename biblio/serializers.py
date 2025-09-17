@@ -161,15 +161,16 @@ class BookDetailSerializer(serializers.ModelSerializer):
     authors = AuthorSerializer(many=True, read_only=True)
     category = CategorySerializer(read_only=True)
     stocks = serializers.SerializerMethodField()
+    available_copies = serializers.IntegerField(read_only=True)
 
     class Meta:
         model = Book
         fields = (
             'id', 'isbn', 'title', 'image_couverture', 'summary', 
             'publisher', 'publication_year', 
-            'authors', 'category',  'is_available', 'stocks'
+            'authors', 'category','available_copies',  'is_available', 'stocks'
         )
-        read_only_fields = ('id','is_available')
+        read_only_fields = ('id', 'available_copies', 'is_available')
 
     def get_stocks(self, obj):
         stocks = obj.stocks.all()

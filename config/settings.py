@@ -12,6 +12,7 @@ import os
 from pathlib import Path
 import environ
 from datetime import timedelta
+from corsheaders.defaults import default_headers
 
 
 # ========================================================================================
@@ -36,6 +37,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env("SECRET_KEY")  # ⚠️ À garder secret en production
 DEBUG = env.bool("DEBUG", default=True)  # True en dev, False en prod
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=[])  # Domaines autorisés pour la prod
+CORS_ALLOW_HEADERS=list(default_headers) + env.list("CORS_ALLOW_HEADERS")
 
 
 # ========================================================================================

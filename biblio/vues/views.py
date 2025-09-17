@@ -17,7 +17,7 @@ from ..models import (
 )
 
 from ..serializers import (
-    AuthorSerializer, CategorySerializer, BookWriteSerializer, LoanRequestCreateSerializer,BookListSerializer, BookDetailSerializer,
+    AuthorSerializer, CategorySerializer, BookWriteSerializer, LoanRequestCreateSerializer, BookDetailSerializer,
     LoanRequestDetailSerializer,  LoanRequestUpdateSerializer, LoanItemSerializer,
     PenaltySerializer,LoanDetailSerializer,LoanReturnSerializer,LoanListSerializer,LoanCreateSerializer ,SuspensionSerializer,LoanRequestListSerializer, NotificationSerializer, AuditLogSerializer,LoanRequestSecretaryResponseSerializer
 )
@@ -98,16 +98,14 @@ class BookViewSet(viewsets.ModelViewSet):
     serializer_class = None
     pagination_class=CustomPagination
     authentication_classes = [CookieOrTokenJWTAuthentication]
-
-
     def get_serializer_class(self, *args, **kwargs):
         if self.action in ["create", "update", "partial_update"]:
             return BookWriteSerializer
         elif self.action == "list":
-            return BookListSerializer
+            return BookDetailSerializer
         elif self.action == "retrieve":
             return BookDetailSerializer
-        return BookListSerializer 
+        return BookDetailSerializer 
     
     
     def get_permissions(self):

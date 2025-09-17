@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 
 # JWT dependencies
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenBlacklistView
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework_simplejwt.tokens import RefreshToken, TokenError
 
 from ..permissions import IsAdmin
@@ -87,15 +87,12 @@ class CustomAuthToken(TokenObtainPairView):
             )
             
         response = super().post(request, *args, **kwargs)
-        print("response",response.data)
-
         if response.status_code == 200:
             access = response.data.get("access")
             refresh = response.data.get("refresh")
             
             # Get user data from validated serializer
             user = response.data.get("user")
-            print(user)
             user_data = UserSerializer(user).data
 
             # Set access token cookie (short-lived)
@@ -145,6 +142,7 @@ class CookieTokenRefreshView(TokenRefreshView):
         by the client via response body or subsequent cookie set.
         """
         refresh = extract_refresh_token(request)
+        data=request.data.copy()
 
         if not refresh:
             return Response(
@@ -153,8 +151,17 @@ class CookieTokenRefreshView(TokenRefreshView):
             )
 
         # Inject into request body for standard JWT processing
-        request.data['refresh'] = refresh
-        return super().post(request, *args, **kwargs)
+        data['refresh'] = refresh
+        serializer=self.get_serializer(data=data)
+        try:
+            serializer.is_valid(raise_exception=True)
+        except exceptions.ValidationError as ve:
+            message = ve.detail.get("detail", ["Erreur inconnue"])[0]
+            return Response(
+               { "message":str(message)}, 
+               status=status.HTTP_400_BAD_REQUEST
+            )
+        return Response(serializer.validated_data, status=status.HTTP_200_OK)
 
 class CookieTokenBlacklistView(views.APIView):
     """
@@ -218,8 +225,6 @@ class CookieTokenBlacklistView(views.APIView):
         )
         
         return response
-
-
 
 class UserViewSet(viewsets.ModelViewSet):
     """ cette classe donne à l'admin le droit de voir tous les enregistrements,
